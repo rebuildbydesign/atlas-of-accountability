@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Atlas of Disaster - Mapping the Impact of Federally Declared Disasters from 2011 to 2023</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- LINK TO STYLESHEET -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- ATLAS OF DISASTER LOGO FILE HIDE FROM WORDPRESS PAGE
+    <div class="css-atlas-title">
+        <img src="img/atlas-title-rbd-2.png">
+    </div> -->
+
+
+    <!-- MAPBOX MAP -->
+    <div id="map"></div>
+
+
+    <!-- LEGEND -->
+    <div id="legend">
+        <div><b># of Federally Declared Disasters (2011-2023)</b></div>
+        <div class="color-bar">
+            <div class="color-description">
+                <span>0</span>
+                <span>2</span>
+                <span>4</span>
+                <span>6</span>
+                <span>8</span>
+                <span>10+</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- TOGGLE COUNTIES WITH FEMA DATA LAYER -->
+    <div id="toggle-counties"
+        style="position: absolute; bottom: 90px; right: 5px; z-index: 999; padding: 6px; background: rgba(255, 255, 255, 0.8); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); border-radius: 5px; cursor: pointer; font-weight: bold;">
+        Hide Disaster Data
+    </div>
+
+
+    <!-- INFORMATION BOX TOP LEFT WITH METHODOLOGY -->
+    <div id="info-icon" style="position: absolute; top: 10px; left: 10px; cursor: pointer; z-index: 1001;">
+        <i class="fas fa-info-circle" style="font-size: 30px; color: #a50f15;"></i>
+    </div>
+    <div id="info-panel">
+        <img src="img/rebuildbydesign.png" style="width: 200px; height: 34px">
+        <p>Extreme weather events are hitting the United States every three days.<sup><a href="https://grist.org/extreme-weather/fema-disaster-relief-fund-government-shutdown-recovery-congress/" target="_blank">1</a></sup> This interactive map presents the intersection of FEMA's federally declared climate  disasters, awarded at the county level (2011 to 2023) with Congressional Districts. Read more about how communities are experiencing climate change in the <a href="https://rebuildbydesign.org/atlas-of-disaster/"
+                target="_blank">Atlas of Disaster</a> by Rebuild by Design.</p>
+        <h3>How To Use</h3>
+        <p><b>1) Explore Disasters:</b> Simply navigate across the map to view the counties affected by federally declared disasters, or add a specific address.</p>
+        <p><b>2) Reveal County Information:</b> Click on a county to see the specific number of disasters it has experienced and to access the information of the corresponding congressional district representative and state senator.</p>
+        <p><b>3) Take Action:</b> Armed with this information, we encourage you to reach out to your representatives. Share your insights from the map and urge them to prioritize resilient infrastructure projects that safeguard our communities.</p>
+        <h3>Methodology</h3>
+        <p>This map is built on a foundation of research and data sources provided by U.S. Government:</p>
+        <ul>
+            <li><strong>FEMA Data:</strong> Disaster declarations for climate events occurring 2011-2023, courtesy iParametric</li>
+            <li><strong>County Districts:</strong> Geographic boundaries from <a
+                href="https://esri.maps.arcgis.com/home/item.html?id=14c5450526a8430298b2fa74da12c2f4"
+                target="_blank">ESRI (2020)</a></li>
+            <li><strong>Congressional Districts:</strong> Geographic boundaries from <a
+                    href="https://geodata.bts.gov/datasets/8ef43e55f7524f02a0ecb3dd415caf33_0/explore"
+                    target="_blank">USDOT BTS</a></li>
+            <li><strong>Current Legislature Database:</strong> Representative contact information from <a
+                    href="https://github.com/unitedstates/congress-legislators?tab=readme-ov-file"
+                    target="_blank">US Github Repository</a></li>
+            
+        </ul>
+    </div>
+
+
+    <!-- LINK TO SCRIPTS.JS -->
+    <script src="scripts.js"></script>
+
+</body>
+
+</html>
