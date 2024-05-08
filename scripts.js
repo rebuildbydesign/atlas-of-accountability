@@ -14,12 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Determine the initial zoom level based on the screen width
-const initialZoom = window.innerWidth < 768 ? 3 : 4;  // Zoom level 3 for mobile, 4 for desktop
+const initialZoom = window.innerWidth < 768 ? 3 : 4.3;  // Zoom level 3 for mobile, 4 for desktop
 
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/j00by/clvx7jcp006zv01ph3miketyz',
-    center: [-97.97919, 40.00215],
+    center: [-97.97135, 38.13880],
     zoom: initialZoom
 });
 
