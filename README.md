@@ -14,13 +14,13 @@ The mission of the Atlas of Disasters is to empower citizens, policymakers, and 
 
 ## Links
 
-Visit the live version of the Atlas of Disasters at [Atlas of Disasters Live](https://rebuildbydesign.github.io/atlas-of-accountability/).
+Visit the live version of the Atlas of Disasters at [Atlas of Accountability Live](https://rebuildbydesign.github.io/atlas-of-accountability/).
 
 The source code for this project is hosted on GitHub. You can access and contribute to the code at [Atlas of Disasters Repo](https://github.com/rebuildbydesign/atlas-of-accountability).
 
 ## Credits
 
-Map created by [Judy Huynh](https://github.com/j00by), Rebuild by Design
+[Judy Huynh](https://github.com/j00by), Rebuild by Design
 
 ## Data Sources
 
