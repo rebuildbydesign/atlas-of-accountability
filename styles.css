@@ -2,7 +2,26 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* Custom header and link colors */
+h3 {
+    color: #a50f15;
+}
+
+a:link,
+a:visited {
+    color: #a50f15;
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+    color: #fcae91;
+    text-decoration: none;
 }
 
 /* Mapbox style */
@@ -29,17 +48,10 @@ body {
 }
 
 .css-atlas-title img {
-    width: 100%;
+    width: 95%;
     /* Makes the image use all available space in the div */
     height: auto;
     /* Keeps the aspect ratio of the image */
-}
-
-@media (max-width: 480px) {
-    .css-atlas-title {
-        width: 95%;
-        /* Allows the logo to use more of the screen on small devices */
-    }
 }
 
 
@@ -47,16 +59,19 @@ body {
 /* Legend bottom left */
 #legend {
     position: absolute;
-    bottom: 20px;
+    bottom: 23px;
     right: 5px;
+    text-align: right;
     z-index: 999;
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    width: 300px;
+    font-size: 13px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    width: 200px;
 }
 
 .color-bar {
@@ -98,36 +113,49 @@ body {
     /* Maximum height of the panel */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     z-index: 1000;
-    font-family: Arial, sans-serif;
-    font-size: calc(10px + 0.5vw);
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: calc(10px + 0.2vw);
     /* Responsive font size */
     overflow-y: auto;
     /* Enables vertical scrolling if content is too tall */
 }
 
-
-/* Custom header and link colors */
-h3 {
-    color: #a50f15;
-}
-
-a:link,
-a:visited {
-    color: #a50f15;
-    text-decoration: none;
-}
-
-a:hover,
-a:active {
-    color: #fcae91;
-    text-decoration: none;
-}
-
-
-/* Toggle countie layer */
+/* Toggle DISASTER DATA */
 #toggle-counties {
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
     font-size: 14px;
     text-align: center;
     color: #de2d26;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    .css-atlas-title {
+        top: 5px; /* Adjusted for better visibility */
+        width: 90%; /* More screen usage */
+    }
+
+    /* Legend responsiveness */
+    #legend {
+        bottom: 10px; /* Closer to the bottom edge */
+        right: 10px; /* More padding on the right */
+        width: 60%; /* More width for better readability */
+        font-size: 12px; /* Slightly smaller text */
+    }
+
+    /* Toggle button for counties layer */
+    #toggle-counties {
+        position: absolute; /* To ensure it doesn't overlap other elements */
+        top: 50px; /* Position below the atlas title */
+        left: 10px; /* Consistent padding from the left edge */
+        width: 60%; /* Full width minus padding */
+        padding: 8px; /* Added padding for better tap target */
+        background: rgba(255, 255, 255, 0.8); /* Background for visibility */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
 }
