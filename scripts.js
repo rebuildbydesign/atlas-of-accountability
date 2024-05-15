@@ -71,7 +71,7 @@ map.on('load', function () {
                 15, '#a50f15',
                 '#ffffff' // Default color used if none of the values match
             ],
-            'fill-opacity': 0.9
+            'fill-opacity': 0.8
         }
     }, 'state-label');
 
@@ -83,6 +83,7 @@ map.on('load', function () {
         data: 'data/US_Districts.json'
     });
 
+
     // Add a layer for districts
     map.addLayer({
         'id': 'districts-layer',
@@ -93,6 +94,7 @@ map.on('load', function () {
             'fill-outline-color': '#000' // Black border color
         }
     });
+
 
     // Line layer specifically for district borders
     map.addLayer({
@@ -106,8 +108,26 @@ map.on('load', function () {
         }
     }, 'state-label');
 
+    map.addSource('state-senators', {
+        type: 'geojson',
+        data: 'data/state-senators.json'
+    });
 
-    // Move the state labels layer to the top to ensure it is on top of all custom layers
+    // IN CASE I WANT TO SHOW THIS STATE BOUNDARIES IN THE FUTURE
+    // map.addLayer({
+    //     'id': 'senators-layer',
+    //     'type': 'circle',
+    //     'source': 'state-senators',
+    //     'paint': {
+    //         'circle-radius': 5,
+    //         'circle-color': '#007cbf'
+    //     }
+    // });
+
+
+
+
+    // MAPBOX STUDIO EDITING - Move the state labels layer to the top to ensure it is on top of all custom layers
     const stateLabelLayerId = 'state-label';
     if (map.getLayer(stateLabelLayerId)) {
         map.moveLayer(stateLabelLayerId);
@@ -115,8 +135,7 @@ map.on('load', function () {
 
 
 
-
-
+    
 
     // When a user clicks on a district, show a popup with contact information
     // Initialize the popup globally if it needs to be accessed by different layers
@@ -155,23 +174,31 @@ map.on('load', function () {
         var seenDistricts = {}; // Object to track seen district entries
         var seenCounties = {}; // Object to track seen county entries
 
+        // DISTRICTS-LAYER = CONGRESSIONAL 118TH NAMES + CONTACT INFO + SENATE + ATLAS
         features.forEach(function (feature) {
             if (feature.layer.id === 'districts-layer') {
                 const props = feature.properties;
                 const districtId = props.FIRSTNAME + props.LASTNAME; // Unique identifier for district entries
+                // congress photourl code here <img src="${props.PHOTOURL}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; align: left;">
+
+                // NAMELSAD 20 = CONGRESSIONAL DISTRICT #
                 if (!seenDistricts[districtId]) {
                     seenDistricts[districtId] = true;
                     districtInfo += `
                         <div style="min-width: 200px">
-                        <p><strong>${props.NAMELSAD20}</strong></p>
-                        <img src="${props.PHOTOURL}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; align: left;">
-                        <p style="font-weight: bold; color: #a50f15">Congress Representative</p>
-                        <p>${props.FIRSTNAME} ${props.LASTNAME} (${props.PARTY})</p> 
+                        <p style="font-weight: bold; color: #fff; background-color: #fb6a4a; padding: 3px;">${props.NAMELSAD20}</p>
+                        <img src="${props.PHOTOURL}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; align: left;"><br>
+                        ${props.FIRSTNAME} ${props.LASTNAME} (${props.PARTY})
                             <p><a href="${props.WEBSITEURL}" target="_blank"><img src="img/id-card.svg" alt="Website" style="width: 24px; height: 24px;"></a>
                                <a href="${props.FACE_BOOK_URL}" target="_blank"><img src="img/facebook.svg" alt="Facebook" style="width: 24px; height: 24px;"></a>
                                <a href="${props.TWITTER_URL}" target="_blank"><img src="img/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
                                <a href="${props.INSTAGRAM_URL}" target="_blank"><img src="img/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
                             </p>
+                             <p style="font-weight: bold; color: #fff; background-color: #fb6a4a; padding: 3px;">Senators</p>
+                            <p>1) <a href="${props.SENATOR1_URL}" target="_blank">${props.SENATOR1}</a><br>
+                           2) <a href="${props.SENATOR2_URL}" target="_blank">${props.SENATOR2}</a><br>
+                           <hr style="height: 2px; background-color: #000; border: none;">
+                            <p>Read more about how this state is experiencing climate change in the <a href="${props.ATLAS_URL}" target="_blank">Atlas of Disaster</a> report by Rebuild by Design.</p>
                         </div>
                     `;
                 }
@@ -182,8 +209,8 @@ map.on('load', function () {
                 if (!seenCounties[countyId]) {
                     seenCounties[countyId] = true;
                     countyInfo += `
-                        <h3 style="border-bottom: 2px solid #fb6a4a; padding-bottom: 5px;">${props.NAME} County, ${stateName}</h4>
-                        <p><strong># of Federally Declared Disasters:</strong> ${props.FEMA_TOTAL_FEMA_DISASTERS}
+                        <h2 style="border-bottom: 2px solid #000; padding-bottom: 5px;">${props.NAME} County, ${stateName}</h2>
+                        <p style="font-weight: bold; color: #fff; background-color: #a50f15; padding: 3px;">${props.FEMA_TOTAL_FEMA_DISASTERS} Federal Declarations</p>
                     `;
                 }
             }
@@ -222,25 +249,53 @@ map.on('load', function () {
         if (visibility === 'visible' || visibility === undefined) {
             // If visible, or undefined (not yet set), hide it
             map.setLayoutProperty('counties-layer', 'visibility', 'none');
-            this.textContent = 'Show Counties Layer'; // Update button text to show
+            this.textContent = 'Show Disaster Data'; // Update button text to show
         } else {
             // If not visible, show it
             map.setLayoutProperty('counties-layer', 'visibility', 'visible');
-            this.textContent = 'Hide Counties Layer'; // Update button text to hide
+            this.textContent = 'Hide Disaster Data'; // Update button text to hide
         }
     });
 
 
+// Initialize the geocoder
+var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    marker: false, // Do not use the default marker
+    placeholder: 'Enter an address to explore', // Placeholder text for the input field
+    zoom: 10, // Zoom level when address is found
+    bbox: [-124.848974, 24.396308, -66.93457, 49.384358] // Optional: Limit search to the United States
+});
+
+// Add the geocoder to the map
+map.addControl(geocoder, 'bottom-left');
+
+
+
+
+
+
+// Handle the result event from the geocoder
+geocoder.on('result', function(e) {
+    var lngLat = e.result.geometry.coordinates;
+
+    window.setTimeout(function() {
+        // Close any existing popup
+        if (popup.isOpen()) {
+            popup.remove();
+        }
+
+        var features = map.queryRenderedFeatures(map.project(lngLat), { layers: ['districts-layer', 'counties-layer'] });
+        var featureHTML = ''; // Logic to generate HTML based on features
+
+        // Set new content and open the popup at the searched location
+        popup.setLngLat(lngLat)
+             .setHTML(featureHTML)
+             .addTo(map);
+    }, 300);
+});
+
 
 
 });
-
-// STATE SENATOR POP UP BOX CODE
-/* <hr style="height: 2px; background-color: #fb6a4a; border: none;">
-                            <p style="font-weight: bold; color: #a50f15">State Senator</p>
-                            <p>Name Here (Party)</p>
-                            <p><a href="#" target="_blank"><img src="img/id-card.svg" alt="Website" style="width: 24px; height: 24px;"></a>
-                            <a href="#" target="_blank"><img src="img/facebook.svg" alt="Facebook" style="width: 24px; height: 24px;"></a>
-                            <a href="#" target="_blank"><img src="img/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
-                            <a href="#" target="_blank"><img src="img/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
-                         </p> */
