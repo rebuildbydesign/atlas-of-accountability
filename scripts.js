@@ -187,19 +187,20 @@ map.on('load', function () {
                     seenDistricts[districtId] = true;
                     districtInfo += `
                         <div style="min-width: 200px">
-                        <p style="font-weight: bold; color: #fff; background-color: #fb6a4a; padding: 3px;">${props.NAMELSAD20}</p>
-                        <img src="${props.PHOTOURL}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; align: left;"><br>
+                        <p style="font-weight: bold; color: #fff; background-color: #000000; padding: 3px;">${props.NAMELSAD20}</p>
+                        <img src="${props.PHOTOURL}" alt="Profile Picture" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block; align: left;"><br>
                         ${props.FIRSTNAME} ${props.LASTNAME} (${props.PARTY})
                             <p><a href="${props.WEBSITEURL}" target="_blank"><img src="img/id-card.svg" alt="Website" style="width: 24px; height: 24px;"></a>
                                <a href="${props.FACE_BOOK_URL}" target="_blank"><img src="img/facebook.svg" alt="Facebook" style="width: 24px; height: 24px;"></a>
                                <a href="${props.TWITTER_URL}" target="_blank"><img src="img/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
                                <a href="${props.INSTAGRAM_URL}" target="_blank"><img src="img/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
                             </p>
-                             <p style="font-weight: bold; color: #fff; background-color: #fb6a4a; padding: 3px;">Senators</p>
+                             <p style="font-weight: bold; color: #fff; background-color: #000000; padding: 3px;">US Senators</p>
                             <p>1) <a href="${props.SENATOR1_URL}" target="_blank">${props.SENATOR1}</a><br>
                            2) <a href="${props.SENATOR2_URL}" target="_blank">${props.SENATOR2}</a><br>
                            <hr style="height: 2px; background-color: #000; border: none;">
-                            <p>Read more about how this state is experiencing climate change in the <a href="${props.ATLAS_URL}" target="_blank">Atlas of Disaster</a> report by Rebuild by Design.</p>
+                            <p>Read more about this on the Atlas of Disaster below.</p>
+                            <p><a href="${props.ATLAS_URL}" target="_blank"><img src="${props.ATLAS_COVER}" alt="Profile Picture" style="width: 200px; object-fit: cover; display: block; align: left;"></a></p>
                         </div>
                     `;
                 }
@@ -210,8 +211,16 @@ map.on('load', function () {
                 if (!seenCounties[countyId]) {
                     seenCounties[countyId] = true;
                     countyInfo += `
-                        <h2 style="border-bottom: 2px solid #000; padding-bottom: 5px;">${props.NAME} County, ${stateName}</h2>
-                        <p style="font-weight: bold; color: #fff; background-color: #a50f15; padding: 3px;">${props.FEMA_TOTAL_FEMA_DISASTERS} Federal Declarations</p>
+                        <h3 style="border-bottom: 2px solid #000; padding-bottom: 5px; color: #000000;">${props.NAME} County, ${stateName}</h3>
+                        <h3 style="font-weight: bold; color: #000;">
+  <div style="display: flex; align-items: center;">
+    <div style="font-size: 40px; color: #a50f15; padding-right: 10px;">${props.FEMA_TOTAL_FEMA_DISASTERS}</div>
+    <div style="font-size: 13px;"># of Federally Declared Extreme Weather Disasters</div>
+  </div>
+</h3>
+
+                    
+
                     `;
                 }
             }
