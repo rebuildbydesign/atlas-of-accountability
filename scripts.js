@@ -208,12 +208,14 @@ map.on('load', function () {
         <p class="namelsad">${feature.NAMELSAD20}</p>
         <h3>Congress Representative</h3>
         <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
-        <img src="${repImage}" alt="Profile Picture" class="rep-image">
-        <div class="social-links">
-            <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
-            <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
-            <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
-            <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+        <div class="rep-info">
+            <img src="${repImage}" alt="Profile Picture" class="rep-image">
+            <div class="social-links">
+                <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+                <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+                <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+                <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+            </div>
         </div>
         <h3>US Senators</h3>
         <div class="senator-info">
