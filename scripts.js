@@ -218,13 +218,13 @@ map.on('load', function () {
         <h3>US Senators</h3>
         <div class="senator-info">
             <div class="senator-row">
-                <img src="https://ziplook.house.gov/zip/pictures/id02_simpson.jpg" alt="Senator 1" class="senator-image">
+                <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 1" class="senator-image">
                 <div>
                     <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
                 </div>
             </div>
             <div class="senator-row">
-                <img src="https://ziplook.house.gov/zip/pictures/id02_simpson.jpg" alt="Senator 2" class="senator-image">
+                <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 2" class="senator-image">
                 <div>
                     <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
                 </div>
