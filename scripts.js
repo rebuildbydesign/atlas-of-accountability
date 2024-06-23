@@ -140,7 +140,7 @@ map.addLayer({
             15, '#a50f15',
             '#ffffff' // Default color used if none of the values match
         ],
-        'fill-opacity': 0.8
+        'fill-opacity': 1
     }
 }, 'state-label');
 
@@ -171,12 +171,14 @@ map.addLayer({
         var facebookUrl = feature.FACE_BOOK_;
         var twitterUrl = feature.TWITTER_UR;
         var instagramUrl = feature.INSTAGRAM_;
-        var senator1 = feature.RBD_SENATOR1;
-        var senator1Url = feature.RBD_SENATOR1_URL;
-        var senator2 = feature.RBD_SENATOR2;
-        var senator2Url = feature.RBD_SENATOR2_URL;
-        var atlasUrl = feature.RBD_ATLAS_URL;
-        var atlasCover = feature.RBD_ATLAS_COVER;
+        var senator1 = feature.SENATOR1;
+        var sen1party = feature.SEN1_PARTY;
+        var senator1Url = feature.SENATOR1_URL;
+        var senator2 = feature.SENATOR2;
+        var sen2party = feature.PARTY_SEN2;
+        var senator2Url = feature.SENATOR2_URL;
+        var atlasUrl = feature.ATLAS_URL;
+        var atlasCover = feature.ATLAS_COVER;
 
         var popupContent = `
             <h3 style="border-bottom: 2px solid #000; padding-bottom: 5px; color: #000000;">${countyName} County, ${stateName}</h3>
@@ -198,8 +200,8 @@ map.addLayer({
                 </p>
                 <p style="font-weight: bold; color: #fff; background-color: #000000; padding: 3px;">US Senators</p>
                 <p>
-                    1) <a href="${senator1Url}" target="_blank">${senator1}</a><br>
-                    2) <a href="${senator2Url}" target="_blank">${senator2}</a><br>
+                    1) <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a><br>
+                    2) <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a><br>
                 </p>
                 <hr style="height: 2px; background-color: #000; border: none;">
                 <p>Read more about this on the Atlas of Disaster below.</p>
