@@ -140,3 +140,81 @@ a:active {
     }
 
 }
+
+.popup-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.popup-column {
+    flex: 1 1 45%;
+}
+
+.popup-column h3 {
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+    color: #000;
+}
+
+.disaster-count {
+    display: flex;
+    align-items: center;
+}
+
+.disaster-count .count {
+    font-size: 40px;
+    color: #a50f15;
+    padding-right: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.disaster-count .count-description {
+    font-size: 13px;
+}
+
+.namelsad {
+    font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    padding: 3px;
+    font-size: 14px;
+}
+
+.atlas-cover {
+    width: 150px;
+    height: auto;
+    display: block;
+}
+
+.rep-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.social-links img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}
+.senator-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.senator-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.senator-image {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
