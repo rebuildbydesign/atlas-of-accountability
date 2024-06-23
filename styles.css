@@ -140,6 +140,9 @@ a:active {
         width: 90%;
         /* More screen usage */
     }
+    .toggle-counties {
+        font-size: 12px;
+    }
 
 }
 
