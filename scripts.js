@@ -322,51 +322,53 @@ map.on('load', function () {
             var formattedStatePopulation = Number(statePopulation).toLocaleString('en-US', { maximumFractionDigits: 0 });
 
             var popupContent = `
-<div class="popup-container">
-    <div class="popup-column">
-        <h3>${countyName} County, ${stateName}</h3>
-        <div class="disaster-count">
-            <div class="count">${disasterCount}</div>
-            <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
-        </div>
-        <p class="namelsad">Total Federal Funding (2011-2023)</p>
-        <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
-        <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
-        <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
-        <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
-        <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-        <p class="namelsad">Atlas of Disaster Report</p>
-        <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
-        <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
-    </div>
-    <div class="popup-column">
-        <p class="namelsad">${feature.NAMELSAD20}</p>
-        <h3>Congress Representative</h3>
-        <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
-        <img src="${repImage}" alt="Profile Picture" class="rep-image">
-        <div class="social-links">
-            <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
-            <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
-            <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
-            <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
-        </div>
-        <h3>US Senators</h3>
-        <div class="senator-info">
-            <div class="senator-row">
-                <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 1" class="senator-image">
-                <div>
-                    <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
+            <div class="popup-container">
+            <div class="popup-column">
+                <h3>${countyName} County, ${stateName}</h3>
+                <div class="disaster-count">
+                    <div class="count">${disasterCount}</div>
+                    <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
+                </div>
+                <p class="namelsad">Total Federal Funding (2011-2023)</p>
+                <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
+                <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
+                <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
+                <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
+                <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
+                <p class="namelsad">Atlas of Disaster Report</p>
+                <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
+                <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+            </div>
+            <div class="popup-column">
+                <p class="namelsad">${feature.NAMELSAD20}</p>
+                <h3>Congress Representative</h3>
+                <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
+                <div class="rep-info">
+                    <img src="${repImage}" alt="Profile Picture" class="rep-image">
+                    <div class="social-links">
+                        <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+                        <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+                        <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+                        <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+                    </div>
+                </div>
+                <h3>US Senators</h3>
+                <div class="senator-info">
+                    <div class="senator-row">
+                        <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 1" class="senator-image">
+                        <div>
+                            <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
+                        </div>
+                    </div>
+                    <div class="senator-row">
+                        <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 2" class="senator-image">
+                        <div>
+                            <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="senator-row">
-                <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 2" class="senator-image">
-                <div>
-                    <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
-                </div>
-            </div>
         </div>
-    </div>
-</div>
             `;
 
             // Set new content and open the popup at the searched location
