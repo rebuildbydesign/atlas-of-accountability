@@ -200,8 +200,7 @@ map.on('load', function () {
         <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
         <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
         <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-        <p class="namelsad">Atlas of Disaster Report</p>
-        <p>Click below to read the Atlas of Disaster: ${stateName} to learn more.</p>
+        <p><b style="color: #a50f15;">Read the Atlas of Disaster: ${stateName} to learn more.</b></p>
         <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
     </div>
     <div class="popup-column">
@@ -237,16 +236,7 @@ map.on('load', function () {
         popup.setLngLat(e.lngLat)
             .setHTML(popupContent)
             .addTo(map);
-
-
-
-        // Display popup at the clicked location
-        popup.setLngLat(e.lngLat)
-            .setHTML(popupContent)
-            .addTo(map);
-
     });
-
 
     // Update mouse settings to change on enter and leave of the interactive layer
     map.on('mouseenter', 'counties-layer', function () {
@@ -307,12 +297,14 @@ map.on('load', function () {
             var facebookUrl = feature.FACE_BOOK_;
             var twitterUrl = feature.TWITTER_UR;
             var instagramUrl = feature.INSTAGRAM_;
-            var senator1 = feature.RBD_SENATOR1;
-            var senator1Url = feature.RBD_SENATOR1_URL;
-            var senator2 = feature.RBD_SENATOR2;
-            var senator2Url = feature.RBD_SENATOR2_URL;
-            var atlasUrl = feature.RBD_ATLAS_URL;
-            var atlasCover = feature.RBD_ATLAS_COVER;
+            var senator1 = feature.SENATOR1;
+            var sen1party = feature.SEN1_PARTY;
+            var senator1Url = feature.SENATOR1_URL;
+            var senator2 = feature.SENATOR2;
+            var sen2party = feature.PARTY_SEN2;
+            var senator2Url = feature.SENATOR2_URL;
+            var atlasUrl = feature.ATLAS_URL;
+            var atlasCover = feature.ATLAS_COVER;
 
             var femaCountyTotalFunds = feature.FEMA_COUNTY_TOTAL_FUNDS;
             var stateFemaTotalFunds = feature.STATE_FEMA_TOTAL_FUNDS;
@@ -320,44 +312,57 @@ map.on('load', function () {
             var statePopulation = feature.STATE_POPULATION;
             var statePerCapita = feature.STATE_PER_CAPITA;
 
+            var formattedFemaCountyTotalFunds = `$${Number(femaCountyTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateFemaTotalFunds = `$${Number(stateFemaTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateCdbgTotalFunds = `$${Number(stateCdbgTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePopulation = Number(statePopulation).toLocaleString('en-US', { maximumFractionDigits: 0 });
+
             var popupContent = `
-                <div style="display: flex; flex-wrap: wrap;">
-                    <div style="flex: 1 1 50%; padding-right: 10px;">
-                        <h3 style="border-bottom: 2px solid #000; padding-bottom: 5px; color: #000000;">${countyName} County, ${stateName}</h3>
-                        <h3 style="font-weight: bold; color: #000;">
-                            <div style="display: flex; align-items: center;">
-                                <div style="font-size: 40px; color: #a50f15; padding-right: 10px;">${disasterCount}</div>
-                                <div style="font-size: 13px;"># of Federally Declared Extreme Weather Disasters</div>
-                            </div>
-                        </h3>
-                        <p style="font-weight: bold; color: #fff; background-color: #000000; padding: 3px;">${feature.NAMELSAD20}</p>
-                        <p>Total Federal Funding (2011-2023):</p>
-                        <p>Wolfe County Total FEMA: ${femaCountyTotalFunds}</p>
-                        <p>Kentucky Total FEMA: ${stateFemaTotalFunds}</p>
-                        <p>Kentucky Total CDBG-DR: ${stateCdbgTotalFunds}</p>
-                        <p>Kentucky Population: ${statePopulation}</p>
-                        <p>Per Capita (Cost Per Person): ${statePerCapita}</p>
-                        <p>For more information, please read the Atlas of Disaster: Kentucky</p>
-                        <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" style="width: 150px; height: auto; display: block;"></a>
-                    </div>
-                    <div style="flex: 1 1 50%; padding-left: 10px;">
-                        <h3 style="font-weight: bold; color: #000;">Congressional District 5</h3>
-                        <p>Congress Representative:</p>
-                        <p>${representativeName} (${party})</p>
-                        <img src="${repImage}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 10px;">
-                        <p>
-                            <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website" style="width: 24px; height: 24px;"></a>
-                            <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook" style="width: 24px; height: 24px;"></a>
-                            <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
-                            <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
-                        </p>
-                        <h3 style="font-weight: bold; color: #000;">US Senators</h3>
-                        <p>
-                            1) <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a><br>
-                            2) <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a><br>
-                        </p>
-                    </div>
+<div class="popup-container">
+    <div class="popup-column">
+        <h3>${countyName} County, ${stateName}</h3>
+        <div class="disaster-count">
+            <div class="count">${disasterCount}</div>
+            <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
+        </div>
+        <p class="namelsad">Total Federal Funding (2011-2023)</p>
+        <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
+        <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
+        <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
+        <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
+        <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
+        <p><b style="color: #a50f15;">Read the Atlas of Disaster: ${stateName} to learn more.</b></p>
+        <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+    </div>
+    <div class="popup-column">
+        <p class="namelsad">${feature.NAMELSAD20}</p>
+        <h3>Congress Representative</h3>
+        <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
+        <img src="${repImage}" alt="Profile Picture" class="rep-image">
+        <div class="social-links">
+            <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+            <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+            <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+            <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+        </div>
+        <h3>US Senators</h3>
+        <div class="senator-info">
+            <div class="senator-row">
+                <img src="https://ziplook.house.gov/zip/pictures/id02_simpson.jpg" alt="Senator 1" class="senator-image">
+                <div>
+                    <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
                 </div>
+            </div>
+            <div class="senator-row">
+                <img src="https://ziplook.house.gov/zip/pictures/id02_simpson.jpg" alt="Senator 2" class="senator-image">
+                <div>
+                    <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
             `;
 
             // Set new content and open the popup at the searched location
