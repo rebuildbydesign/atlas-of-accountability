@@ -135,24 +135,34 @@ a:active {
 /* Responsive styles for mobile devices */
 @media (max-width: 480px) {
     .css-atlas-title {
-        top: 5px; /* Adjusted for better visibility */
-        width: 90%; /* More screen usage */
+        top: 5px;
+        /* Adjusted for better visibility */
+        width: 90%;
+        /* More screen usage */
     }
 
 }
+
+
+/* POP UP DESIGN */
+
 
 .popup-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    z-index: 9999; /* Ensure popup is on top */
-    position: relative; /* Ensure positioning context */
-    width: 500px; /* Adjust this value to your desired width */
+    z-index: 9999;
+    /* Ensure popup is on top */
+    position: relative;
+    /* Ensure positioning context */
+    width: 500px;
+    /* Adjust this value to your desired width */
 }
 
 @font-face {
     font-family: 'RBDBoldOutlined';
-    src: url('https://judyhuynh.ca/RBDBoldOutlined.ttf') format('truetype'); /* Change the format if needed */
+    src: url('https://judyhuynh.ca/RBDBoldOutlined.ttf') format('truetype');
+    /* Change the format if needed */
     font-weight: normal;
     font-style: normal;
 }
@@ -226,14 +236,16 @@ a:active {
 .rep-info {
     display: flex;
     align-items: center;
-    gap: 30px; /* Add gap between profile pic and social links */
+    gap: 30px;
+    /* Add gap between profile pic and social links */
 }
 
 .social-links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7px; /* Reduce gap between icons */
+    gap: 7px;
+    /* Reduce gap between icons */
 }
 
 .social-links img {
@@ -257,4 +269,90 @@ a:active {
     height: 75px;
     border-radius: 50%;
     margin-right: 10px;
+}
+
+/* General popup container adjustments for mobile */
+@media (max-width: 768px) {
+    .popup-container {
+        display: flex;
+        flex-direction: column;
+        /* Stack columns vertically on smaller screens */
+        width: 100%;
+        /* Make popup full width on small screens */
+        padding: 5px;
+        /* Add padding to the container */
+    }
+
+    .popup-column {
+        width: 100%;
+        /* Make each column take full width */
+        margin-bottom: 0px;
+        /* Add some space between columns */
+    }
+
+    .disaster-count .count {
+        font-size: 35px;
+        /* Reduce font size for disaster count */
+    }
+
+    .disaster-count .count-description {
+        font-size: 12px;
+    }
+
+    .rep-info,
+    .senator-info {
+        flex-direction: column;
+        /* Stack representative and senator info vertically */
+        align-items: flex-start;
+        /* Align items to the start */
+        gap: 8px;
+        /* Add some space between elements */
+    }
+
+    .rep-image {
+        width: 100px;
+        /* Reduce image size */
+        height: 100px;
+        /* Maintain aspect ratio */
+    }
+
+    .senator-image {
+        width: 70px;
+        /* Reduce image size */
+        height: 70px;
+        /* Maintain aspect ratio */
+    }
+
+    .social-links {
+        flex-direction: row;
+        /* Arrange social links in a row */
+        gap: 8px;
+        /* Add space between social icons */
+    }
+
+    .popup-column h3 {
+        font-size: 13px;
+        /* Adjust heading font size */
+    }
+
+    .popup-column p,
+    .popup-column b,
+    a:link,
+a:visited {
+        font-size: 12px;
+        /* Adjust paragraph and bold text font size */
+    }
+
+    .atlas-cover {
+        width: 100px;
+        /* Reduce atlas cover size */
+    }
+}
+
+/* Adjust the font size of the methodology panel for mobile */
+@media (max-width: 480px) {
+    #info-panel {
+        font-size: calc(9px + 0.2vw);
+        /* Smaller font size */
+    }
 }
