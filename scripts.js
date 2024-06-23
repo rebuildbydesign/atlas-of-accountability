@@ -189,7 +189,7 @@ map.on('load', function () {
         var popupContent = `
 <div class="popup-container">
     <div class="popup-column">
-        <h3>${countyName} County, ${stateName}</h3>
+        <h3>${countyName}, ${stateName}</h3>
         <div class="disaster-count">
             <div class="count">${disasterCount}</div>
             <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
@@ -324,7 +324,7 @@ map.on('load', function () {
             var popupContent = `
             <div class="popup-container">
             <div class="popup-column">
-                <h3>${countyName} County, ${stateName}</h3>
+                <h3>${countyName}, ${stateName}</h3>
                 <div class="disaster-count">
                     <div class="count">${disasterCount}</div>
                     <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
