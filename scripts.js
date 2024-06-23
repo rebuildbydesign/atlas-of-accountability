@@ -194,7 +194,7 @@ map.on('load', function () {
             <div class="count">${disasterCount}</div>
             <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
         </div>
-        <p class="namelsad">Total Federal Funding (2011-2023)</p>
+        <p class="namelsad">FEMA Obligations & HUD CDBG-DR</p>
         <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
         <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
         <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
@@ -329,10 +329,11 @@ map.on('load', function () {
                     <div class="count">${disasterCount}</div>
                     <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
                 </div>
-                <p class="namelsad">Total Federal Funding (2011-2023)</p>
+                <p class="namelsad">FEMA Obligations & HUD CDBG-DR</p>
                 <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
                 <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
                 <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
+                <b>${stateName} Total Federal Funds:</b> ${formattedStateCdbgTotalFunds}<br>
                 <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
                 <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
                 <p class="namelsad">Atlas of Disaster Report</p>
