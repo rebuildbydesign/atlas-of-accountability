@@ -167,6 +167,7 @@ a:active {
 .disaster-count .count {
     font-size: 40px;
     color: #a50f15;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     padding-right: 10px;
 }
 

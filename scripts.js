@@ -200,7 +200,8 @@ map.on('load', function () {
         <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
         <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
         <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-        <p><b style="color: #a50f15;">Read the Atlas of Disaster: ${stateName} to learn more.</b></p>
+        <p class="namelsad">Atlas of Disaster Report</p>
+        <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
         <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
     </div>
     <div class="popup-column">
@@ -332,7 +333,8 @@ map.on('load', function () {
         <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
         <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
         <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-        <p><b style="color: #a50f15;">Read the Atlas of Disaster: ${stateName} to learn more.</b></p>
+        <p class="namelsad">Atlas of Disaster Report</p>
+        <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
         <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
     </div>
     <div class="popup-column">
@@ -349,13 +351,13 @@ map.on('load', function () {
         <h3>US Senators</h3>
         <div class="senator-info">
             <div class="senator-row">
-                <img src="https://ziplook.house.gov/zip/pictures/id02_simpson.jpg" alt="Senator 1" class="senator-image">
+                <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 1" class="senator-image">
                 <div>
                     <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
                 </div>
             </div>
             <div class="senator-row">
-                <img src="https://ziplook.house.gov/zip/pictures/id02_simpson.jpg" alt="Senator 2" class="senator-image">
+                <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 2" class="senator-image">
                 <div>
                     <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
                 </div>
