@@ -51,7 +51,8 @@ map.on('load', function () {
         'paint': {
             'fill-color': [
                 'match',
-                ['coalesce', ['get', 'COUNTY_DISASTER_COUNT'], 0], // Default to 0 if value is null
+                // Convert the string value to an integer using parseInt
+                ['to-number', ['coalesce', ['get', 'COUNTY_DISASTER_COUNT'], 0]],
                 0, '#ffffff',
                 1, '#fee5d9',
                 2, '#fee5d9',
@@ -70,7 +71,7 @@ map.on('load', function () {
                 15, '#a50f15',
                 '#ffffff' // Default color used if none of the values match
             ],
-            'fill-opacity': 0.8
+            'fill-opacity': 1
         }
     }, 'state-label');
 
@@ -103,42 +104,7 @@ map.on('load', function () {
         }
     }, 'state-label');
 
-    // Load the GeoJSON file for counties and FEMA declaration count
-    map.addSource('counties', {
-        type: 'geojson',
-        data: 'data/US_Counties.json'
-    });
 
-    // Add a layer for counties
-    map.addLayer({
-        'id': 'counties-layer',
-        'type': 'fill',
-        'source': 'counties',
-        'paint': {
-            'fill-color': [
-                'match',
-                ['coalesce', ['get', 'FEMA_TOTAL_FEMA_DISASTERS'], 0], // Default to 0 if value is null
-                0, '#ffffff',
-                1, '#fee5d9',
-                2, '#fee5d9',
-                3, '#fcae91',
-                4, '#fcae91',
-                5, '#fb6a4a',
-                6, '#fb6a4a',
-                7, '#de2d26',
-                8, '#de2d26',
-                9, '#de2d26',
-                10, '#a50f15',
-                11, '#a50f15',
-                12, '#a50f15',
-                13, '#a50f15',
-                14, '#a50f15',
-                15, '#a50f15',
-                '#ffffff' // Default color used if none of the values match
-            ],
-            'fill-opacity': 1
-        }
-    }, 'state-label');
 
     // Initialize the popup globally if it needs to be accessed by different layers
     var popup = new mapboxgl.Popup({
@@ -153,7 +119,7 @@ map.on('load', function () {
         if (!features.length) {
             return;
         }
-
+    
         var feature = features[0].properties;
         var stateName = feature.STATE_NAME;
         var countyName = feature.COUNTY_NAME;
@@ -166,80 +132,81 @@ map.on('load', function () {
         var twitterUrl = feature.TWITTER_UR;
         var instagramUrl = feature.INSTAGRAM_;
         var senator1 = feature.SENATOR1;
-        var sen1party = feature.SEN1_PARTY;
+        var sen1party = feature.SENATOR1_PARTY;
         var senator1Url = feature.SENATOR1_URL;
         var senator2 = feature.SENATOR2;
-        var sen2party = feature.PARTY_SEN2;
+        var sen2party = feature.SENATOR2_PARTY;
         var senator2Url = feature.SENATOR2_URL;
         var atlasUrl = feature.ATLAS_URL;
         var atlasCover = feature.ATLAS_COVER;
-
+    
         var femaCountyTotalFunds = feature.FEMA_COUNTY_TOTAL_FUNDS;
         var stateFemaTotalFunds = feature.STATE_FEMA_TOTAL_FUNDS;
         var stateCdbgTotalFunds = feature.STATE_CDBG_TOTAL_FUNDS;
         var statePopulation = feature.STATE_POPULATION;
         var statePerCapita = feature.STATE_PER_CAPITA;
-
+    
         var formattedFemaCountyTotalFunds = `$${Number(femaCountyTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         var formattedStateFemaTotalFunds = `$${Number(stateFemaTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         var formattedStateCdbgTotalFunds = `$${Number(stateCdbgTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         var formattedStatePopulation = Number(statePopulation).toLocaleString('en-US', { maximumFractionDigits: 0 });
-
+    
         var popupContent = `
-<div class="popup-container">
-    <div class="popup-column">
-        <h3>${countyName}, ${stateName}</h3>
-        <div class="disaster-count">
-            <div class="count">${disasterCount}</div>
-            <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
-        </div>
-        <p class="namelsad">FEMA Obligations & HUD CDBG-DR</p>
-        <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
-        <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
-        <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
-        <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
-        <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-        <p class="namelsad">Atlas of Disaster Report</p>
-        <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
-        <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
-    </div>
-    <div class="popup-column">
-        <p class="namelsad">${feature.NAMELSAD20}</p>
-        <h3>Congress Representative</h3>
-        <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
-        <div class="rep-info">
-            <img src="${repImage}" alt="Profile Picture" class="rep-image">
-            <div class="social-links">
-                <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
-                <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
-                <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
-                <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+    <div class="popup-container">
+        <div class="popup-column">
+            <h3>${countyName}, ${stateName}</h3>
+            <div class="disaster-count">
+                <div class="count">${disasterCount}</div>
+                <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
             </div>
+            <p class="namelsad">FEMA Obligations & HUD CDBG-DR</p>
+            <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
+            <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
+            <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
+            <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
+            <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
+            <p class="namelsad">Atlas of Disaster Report</p>
+            <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
+            <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
         </div>
-        <h3>US Senators</h3>
-        <div class="senator-info">
-            <div class="senator-row">
-                <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 1" class="senator-image">
-                <div>
-                    <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
+        <div class="popup-column">
+            <p class="namelsad">${feature.NAMELSAD20}</p>
+            <h3>Congress Representative</h3>
+            <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
+            <div class="rep-info">
+                <img src="${repImage}" alt="Profile Picture" class="rep-image">
+                <div class="social-links">
+                    <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+                    <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+                    <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+                    <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
                 </div>
             </div>
-            <div class="senator-row">
-                <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 2" class="senator-image">
-                <div>
-                    <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
+            <h3>US Senators</h3>
+            <div class="senator-info">
+                <div class="senator-row">
+                    <img src="${feature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
+                    <div>
+                        <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
+                    </div>
+                </div>
+                <div class="senator-row">
+                    <img src="${feature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
+                    <div>
+                        <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
         `;
-
+    
         popup.setLngLat(e.lngLat)
             .setHTML(popupContent)
             .addTo(map);
     });
+    
 
     // Update mouse settings to change on enter and leave of the interactive layer
     map.on('mouseenter', 'counties-layer', function () {
@@ -290,85 +257,85 @@ map.on('load', function () {
             }
 
             var feature = features[0].properties;
-            var stateName = feature.STATE_NAME;
-            var countyName = feature.COUNTY_NAME;
-            var disasterCount = feature.COUNTY_DISASTER_COUNT;
-            var representativeName = `${feature.FIRSTNAME} ${feature.LASTNAME}`;
-            var party = feature.PARTY;
-            var repImage = feature.PHOTOURL;
-            var websiteUrl = feature.WEBSITEURL;
-            var facebookUrl = feature.FACE_BOOK_;
-            var twitterUrl = feature.TWITTER_UR;
-            var instagramUrl = feature.INSTAGRAM_;
-            var senator1 = feature.SENATOR1;
-            var sen1party = feature.SEN1_PARTY;
-            var senator1Url = feature.SENATOR1_URL;
-            var senator2 = feature.SENATOR2;
-            var sen2party = feature.PARTY_SEN2;
-            var senator2Url = feature.SENATOR2_URL;
-            var atlasUrl = feature.ATLAS_URL;
-            var atlasCover = feature.ATLAS_COVER;
-
-            var femaCountyTotalFunds = feature.FEMA_COUNTY_TOTAL_FUNDS;
-            var stateFemaTotalFunds = feature.STATE_FEMA_TOTAL_FUNDS;
-            var stateCdbgTotalFunds = feature.STATE_CDBG_TOTAL_FUNDS;
-            var statePopulation = feature.STATE_POPULATION;
-            var statePerCapita = feature.STATE_PER_CAPITA;
-
-            var formattedFemaCountyTotalFunds = `$${Number(femaCountyTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStateFemaTotalFunds = `$${Number(stateFemaTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStateCdbgTotalFunds = `$${Number(stateCdbgTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStatePopulation = Number(statePopulation).toLocaleString('en-US', { maximumFractionDigits: 0 });
-
-            var popupContent = `
-            <div class="popup-container">
-            <div class="popup-column">
-                <h3>${countyName}, ${stateName}</h3>
-                <div class="disaster-count">
-                    <div class="count">${disasterCount}</div>
-                    <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
-                </div>
-                <p class="namelsad">FEMA Obligations & HUD CDBG-DR</p>
-                <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
-                <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
-                <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
-                <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
-                <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-                <p class="namelsad">Atlas of Disaster Report</p>
-                <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
-                <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+        var stateName = feature.STATE_NAME;
+        var countyName = feature.COUNTY_NAME;
+        var disasterCount = feature.COUNTY_DISASTER_COUNT;
+        var representativeName = `${feature.FIRSTNAME} ${feature.LASTNAME}`;
+        var party = feature.PARTY;
+        var repImage = feature.PHOTOURL;
+        var websiteUrl = feature.WEBSITEURL;
+        var facebookUrl = feature.FACE_BOOK_;
+        var twitterUrl = feature.TWITTER_UR;
+        var instagramUrl = feature.INSTAGRAM_;
+        var senator1 = feature.SENATOR1;
+        var sen1party = feature.SENATOR1_PARTY;
+        var senator1Url = feature.SENATOR1_URL;
+        var senator2 = feature.SENATOR2;
+        var sen2party = feature.SENATOR2_PARTY;
+        var senator2Url = feature.SENATOR2_URL;
+        var atlasUrl = feature.ATLAS_URL;
+        var atlasCover = feature.ATLAS_COVER;
+    
+        var femaCountyTotalFunds = feature.FEMA_COUNTY_TOTAL_FUNDS;
+        var stateFemaTotalFunds = feature.STATE_FEMA_TOTAL_FUNDS;
+        var stateCdbgTotalFunds = feature.STATE_CDBG_TOTAL_FUNDS;
+        var statePopulation = feature.STATE_POPULATION;
+        var statePerCapita = feature.STATE_PER_CAPITA;
+    
+        var formattedFemaCountyTotalFunds = `$${Number(femaCountyTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStateFemaTotalFunds = `$${Number(stateFemaTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStateCdbgTotalFunds = `$${Number(stateCdbgTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStatePopulation = Number(statePopulation).toLocaleString('en-US', { maximumFractionDigits: 0 });
+    
+        var popupContent = `
+    <div class="popup-container">
+        <div class="popup-column">
+            <h3>${countyName}, ${stateName}</h3>
+            <div class="disaster-count">
+                <div class="count">${disasterCount}</div>
+                <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
             </div>
-            <div class="popup-column">
-                <p class="namelsad">${feature.NAMELSAD20}</p>
-                <h3>Congress Representative</h3>
-                <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
-                <div class="rep-info">
-                    <img src="${repImage}" alt="Profile Picture" class="rep-image">
-                    <div class="social-links">
-                        <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
-                        <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
-                        <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
-                        <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+            <p class="namelsad">FEMA Obligations & HUD CDBG-DR</p>
+            <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
+            <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
+            <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
+            <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
+            <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
+            <p class="namelsad">Atlas of Disaster Report</p>
+            <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
+            <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+        </div>
+        <div class="popup-column">
+            <p class="namelsad">${feature.NAMELSAD20}</p>
+            <h3>Congress Representative</h3>
+            <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
+            <div class="rep-info">
+                <img src="${repImage}" alt="Profile Picture" class="rep-image">
+                <div class="social-links">
+                    <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+                    <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+                    <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+                    <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+                </div>
+            </div>
+            <h3>US Senators</h3>
+            <div class="senator-info">
+                <div class="senator-row">
+                    <img src="${feature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
+                    <div>
+                        <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
                     </div>
                 </div>
-                <h3>US Senators</h3>
-                <div class="senator-info">
-                    <div class="senator-row">
-                        <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 1" class="senator-image">
-                        <div>
-                            <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
-                        </div>
-                    </div>
-                    <div class="senator-row">
-                        <img src="https://static.wikia.nocookie.net/headsoccer/images/1/1b/Mystery_character.png" alt="Senator 2" class="senator-image">
-                        <div>
-                            <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
-                        </div>
+                <div class="senator-row">
+                    <img src="${feature.SENATE2_PIC}" alt="Senator 2" class="senator-image">
+                    <div>
+                        <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
             `;
 
             // Set new content and open the popup at the searched location
