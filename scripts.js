@@ -71,7 +71,7 @@ map.on('load', function () {
                 15, '#a50f15',
                 '#ffffff' // Default color used if none of the values match
             ],
-            'fill-opacity': 0.8
+            'fill-opacity': 1
         }
     }, 'state-label');
 
