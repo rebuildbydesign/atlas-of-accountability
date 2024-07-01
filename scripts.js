@@ -71,21 +71,21 @@ map.on('load', function () {
                 15, '#a50f15',
                 '#ffffff' // Default color used if none of the values match
             ],
-            'fill-opacity': 1
+            'fill-opacity': 0.6
         }
     }, 'state-label');
 
     // Load the GeoJSON file for congressional districts with representative names
-    map.addSource('districts', {
+    map.addSource('congress', {
         type: 'geojson',
-        data: 'data/US_Districts.json'
+        data: 'data/US_Congress.json'
     });
 
     // Add a layer for districts
     map.addLayer({
-        'id': 'districts-layer',
+        'id': 'congress-layer',
         'type': 'fill',
-        'source': 'districts',
+        'source': 'congress',
         'paint': {
             'fill-color': 'transparent', // No fill color
             'fill-outline-color': '#000' // Black border color
@@ -94,9 +94,9 @@ map.on('load', function () {
 
     // Line layer specifically for district borders
     map.addLayer({
-        'id': 'districts-border',
+        'id': 'congress-border',
         'type': 'line',
-        'source': 'districts',
+        'source': 'congress',
         'layout': {},
         'paint': {
             'line-color': '#000', // Black border color
@@ -115,43 +115,47 @@ map.on('load', function () {
 
     // When a user clicks on the map, show a popup with information
     map.on('click', function (e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ['atlas-fema-layer'] });
-        if (!features.length) {
+        var femaFeatures = map.queryRenderedFeatures(e.point, { layers: ['atlas-fema-layer'] });
+        var congressFeatures = map.queryRenderedFeatures(e.point, { layers: ['congress-layer'] });
+
+        if (!femaFeatures.length || !congressFeatures.length) {
             return;
         }
-    
-        var feature = features[0].properties;
-        var stateName = feature.STATE_NAME;
-        var countyName = feature.COUNTY_NAME;
-        var disasterCount = feature.COUNTY_DISASTER_COUNT;
-        var representativeName = `${feature.FIRSTNAME} ${feature.LASTNAME}`;
-        var party = feature.PARTY;
-        var repImage = feature.PHOTOURL;
-        var websiteUrl = feature.WEBSITEURL;
-        var facebookUrl = feature.FACE_BOOK_;
-        var twitterUrl = feature.TWITTER_UR;
-        var instagramUrl = feature.INSTAGRAM_;
-        var senator1 = feature.SENATOR1;
-        var sen1party = feature.SENATOR1_PARTY;
-        var senator1Url = feature.SENATOR1_URL;
-        var senator2 = feature.SENATOR2;
-        var sen2party = feature.SENATOR2_PARTY;
-        var senator2Url = feature.SENATOR2_URL;
-        var atlasUrl = feature.ATLAS_URL;
-        var atlasCover = feature.ATLAS_COVER;
-    
-        var femaCountyTotalFunds = feature.FEMA_COUNTY_TOTAL_FUNDS;
-        var stateFemaTotalFunds = feature.STATE_FEMA_TOTAL_FUNDS;
-        var stateCdbgTotalFunds = feature.STATE_CDBG_TOTAL_FUNDS;
-        var statePopulation = feature.STATE_POPULATION;
-        var statePerCapita = feature.STATE_PER_CAPITA;
-    
+
+        var femaFeature = femaFeatures[0].properties;
+        var congressFeature = congressFeatures[0].properties;
+
+        var stateName = femaFeature.STATE_NAME;
+        var countyName = femaFeature.COUNTY_NAME;
+        var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
+        var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
+        var party = congressFeature.PARTY;
+        var repImage = congressFeature.PHOTOURL;
+        var websiteUrl = congressFeature.WEBSITEURL;
+        var facebookUrl = congressFeature.FACE_BOOK_URL;
+        var twitterUrl = congressFeature.TWITTER_URL;
+        var instagramUrl = congressFeature.INSTAGRAM_URL;
+        var senator1 = congressFeature.SENATOR1;
+        var sen1party = congressFeature.SENATOR1_PARTY;
+        var senator1Url = congressFeature.SENATOR1_URL;
+        var senator2 = congressFeature.SENATOR2;
+        var sen2party = congressFeature.SENATOR2_PARTY;
+        var senator2Url = congressFeature.SENATOR2_URL;
+        var atlasUrl = femaFeature.ATLAS_URL;
+        var atlasCover = congressFeature.ATLAS_COVER;
+
+        var femaCountyTotalFunds = femaFeature.FEMA_COUNTY_TOTAL_FUNDS;
+        var stateFemaTotalFunds = femaFeature.STATE_FEMA_TOTAL_FUNDS;
+        var stateCdbgTotalFunds = femaFeature.STATE_CDBG_TOTAL_FUNDS;
+        var statePopulation = femaFeature.STATE_POPULATION;
+        var statePerCapita = femaFeature.STATE_PER_CAPITA;
+
         var formattedFemaCountyTotalFunds = `$${Number(femaCountyTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         var formattedStateFemaTotalFunds = `$${Number(stateFemaTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         var formattedStateCdbgTotalFunds = `$${Number(stateCdbgTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         var formattedStatePopulation = Number(statePopulation).toLocaleString('en-US', { maximumFractionDigits: 0 });
-    
+
         var popupContent = `
     <div class="popup-container">
         <div class="popup-column">
@@ -171,7 +175,7 @@ map.on('load', function () {
             <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
         </div>
         <div class="popup-column">
-            <p class="namelsad">${feature.NAMELSAD20}</p>
+            <p class="namelsad">${congressFeature.NAMELSAD20}</p>
             <h3>Congress Representative</h3>
             <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
             <div class="rep-info">
@@ -186,13 +190,13 @@ map.on('load', function () {
             <h3>US Senators</h3>
             <div class="senator-info">
                 <div class="senator-row">
-                    <img src="${feature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
+                    <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
                     <div>
                         <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
                     </div>
                 </div>
                 <div class="senator-row">
-                    <img src="${feature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
+                    <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
                     <div>
                         <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
                     </div>
@@ -201,30 +205,35 @@ map.on('load', function () {
         </div>
     </div>
         `;
-    
+
         popup.setLngLat(e.lngLat)
             .setHTML(popupContent)
             .addTo(map);
     });
-    
+
+
+
+
+
+
 
     // Update mouse settings to change on enter and leave of the interactive layer
-    map.on('mouseenter', 'counties-layer', function () {
+    map.on('mouseenter', 'atlas-fema-layer', function () {
         map.getCanvas().style.cursor = 'pointer';
     });
 
-    map.on('mouseleave', 'counties-layer', function () {
+    map.on('mouseleave', 'atlas-fema-layer', function () {
         map.getCanvas().style.cursor = '';
     });
 
     // Toggle disaster data layer visibility
     document.getElementById('toggle-counties').addEventListener('click', function () {
-        var visibility = map.getLayoutProperty('counties-layer', 'visibility');
+        var visibility = map.getLayoutProperty('atlas-fema-layer', 'visibility');
         if (visibility === 'visible' || visibility === undefined) {
-            map.setLayoutProperty('counties-layer', 'visibility', 'none');
+            map.setLayoutProperty('atlas-fema-layer', 'visibility', 'none');
             this.textContent = 'Show Disaster Data';
         } else {
-            map.setLayoutProperty('counties-layer', 'visibility', 'visible');
+            map.setLayoutProperty('atlas-fema-layer', 'visibility', 'visible');
             this.textContent = 'Hide Disaster Data';
         }
     });
@@ -251,91 +260,95 @@ map.on('load', function () {
                 popup.remove();
             }
 
-            var features = map.queryRenderedFeatures(map.project(lngLat), { layers: ['atlas-fema-layer'] });
-            if (!features.length) {
+            var femaFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['atlas-fema-layer'] });
+            var congressFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['congress-layer'] });
+
+            if (!femaFeatures.length || !congressFeatures.length) {
                 return;
             }
 
-            var feature = features[0].properties;
-        var stateName = feature.STATE_NAME;
-        var countyName = feature.COUNTY_NAME;
-        var disasterCount = feature.COUNTY_DISASTER_COUNT;
-        var representativeName = `${feature.FIRSTNAME} ${feature.LASTNAME}`;
-        var party = feature.PARTY;
-        var repImage = feature.PHOTOURL;
-        var websiteUrl = feature.WEBSITEURL;
-        var facebookUrl = feature.FACE_BOOK_;
-        var twitterUrl = feature.TWITTER_UR;
-        var instagramUrl = feature.INSTAGRAM_;
-        var senator1 = feature.SENATOR1;
-        var sen1party = feature.SENATOR1_PARTY;
-        var senator1Url = feature.SENATOR1_URL;
-        var senator2 = feature.SENATOR2;
-        var sen2party = feature.SENATOR2_PARTY;
-        var senator2Url = feature.SENATOR2_URL;
-        var atlasUrl = feature.ATLAS_URL;
-        var atlasCover = feature.ATLAS_COVER;
-    
-        var femaCountyTotalFunds = feature.FEMA_COUNTY_TOTAL_FUNDS;
-        var stateFemaTotalFunds = feature.STATE_FEMA_TOTAL_FUNDS;
-        var stateCdbgTotalFunds = feature.STATE_CDBG_TOTAL_FUNDS;
-        var statePopulation = feature.STATE_POPULATION;
-        var statePerCapita = feature.STATE_PER_CAPITA;
-    
-        var formattedFemaCountyTotalFunds = `$${Number(femaCountyTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStateFemaTotalFunds = `$${Number(stateFemaTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStateCdbgTotalFunds = `$${Number(stateCdbgTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStatePopulation = Number(statePopulation).toLocaleString('en-US', { maximumFractionDigits: 0 });
-    
-        var popupContent = `
-    <div class="popup-container">
-        <div class="popup-column">
-            <h3>${countyName}, ${stateName}</h3>
-            <div class="disaster-count">
-                <div class="count">${disasterCount}</div>
-                <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
-            </div>
-            <p class="namelsad">FEMA Obligations & HUD CDBG-DR</p>
-            <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
-            <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
-            <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
-            <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
-            <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-            <p class="namelsad">Atlas of Disaster Report</p>
-            <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
-            <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
-        </div>
-        <div class="popup-column">
-            <p class="namelsad">${feature.NAMELSAD20}</p>
-            <h3>Congress Representative</h3>
-            <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
-            <div class="rep-info">
-                <img src="${repImage}" alt="Profile Picture" class="rep-image">
-                <div class="social-links">
-                    <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
-                    <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
-                    <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
-                    <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+            var femaFeature = femaFeatures[0].properties;
+            var congressFeature = congressFeatures[0].properties;
+
+            var stateName = femaFeature.STATE_NAME;
+            var countyName = femaFeature.COUNTY_NAME;
+            var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
+            var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
+            var party = congressFeature.PARTY;
+            var repImage = congressFeature.PHOTOURL;
+            var websiteUrl = congressFeature.WEBSITEURL;
+            var facebookUrl = congressFeature.FACE_BOOK_URL;
+            var twitterUrl = congressFeature.TWITTER_URL;
+            var instagramUrl = congressFeature.INSTAGRAM_URL;
+            var senator1 = congressFeature.SENATOR1;
+            var sen1party = congressFeature.SENATOR1_PARTY;
+            var senator1Url = congressFeature.SENATOR1_URL;
+            var senator2 = congressFeature.SENATOR2;
+            var sen2party = congressFeature.SENATOR2_PARTY;
+            var senator2Url = congressFeature.SENATOR2_URL;
+            var atlasUrl = femaFeature.ATLAS_URL;
+            var atlasCover = congressFeature.ATLAS_COVER;
+
+            var femaCountyTotalFunds = femaFeature.FEMA_COUNTY_TOTAL_FUNDS;
+            var stateFemaTotalFunds = femaFeature.STATE_FEMA_TOTAL_FUNDS;
+            var stateCdbgTotalFunds = femaFeature.STATE_CDBG_TOTAL_FUNDS;
+            var statePopulation = femaFeature.STATE_POPULATION;
+            var statePerCapita = femaFeature.STATE_PER_CAPITA;
+
+            var formattedFemaCountyTotalFunds = `$${Number(femaCountyTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateFemaTotalFunds = `$${Number(stateFemaTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateCdbgTotalFunds = `$${Number(stateCdbgTotalFunds).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePopulation = Number(statePopulation).toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+            var popupContent = `
+            <div class="popup-container">
+                <div class="popup-column">
+                    <h3>${countyName}, ${stateName}</h3>
+                    <div class="disaster-count">
+                        <div class="count">${disasterCount}</div>
+                        <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
+                    </div>
+                    <p class="namelsad">FEMA Obligations & HUD CDBG-DR</p>
+                    <b>${countyName} Total FEMA:</b> ${formattedFemaCountyTotalFunds}<br>
+                    <b>${stateName} Total FEMA:</b> ${formattedStateFemaTotalFunds}<br>
+                    <b>${stateName} Total CDBG-DR:</b> ${formattedStateCdbgTotalFunds}<br>
+                    <b>${stateName} Population:</b> ${formattedStatePopulation}<br>
+                    <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
+                    <p class="namelsad">Atlas of Disaster Report</p>
+                    <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
+                    <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
                 </div>
-            </div>
-            <h3>US Senators</h3>
-            <div class="senator-info">
-                <div class="senator-row">
-                    <img src="${feature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
-                    <div>
-                        <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
+                <div class="popup-column">
+                    <p class="namelsad">${congressFeature.NAMELSAD20}</p>
+                    <h3>Congress Representative</h3>
+                    <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
+                    <div class="rep-info">
+                        <img src="${repImage}" alt="Profile Picture" class="rep-image">
+                        <div class="social-links">
+                            <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+                            <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+                            <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+                            <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+                        </div>
+                    </div>
+                    <h3>US Senators</h3>
+                    <div class="senator-info">
+                        <div class="senator-row">
+                            <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
+                            <div>
+                                <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
+                            </div>
+                        </div>
+                        <div class="senator-row">
+                            <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
+                            <div>
+                                <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="senator-row">
-                    <img src="${feature.SENATE2_PIC}" alt="Senator 2" class="senator-image">
-                    <div>
-                        <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
-                    </div>
-                </div>
             </div>
-        </div>
-    </div>
             `;
 
             // Set new content and open the popup at the searched location
