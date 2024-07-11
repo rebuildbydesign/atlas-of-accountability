@@ -222,7 +222,7 @@ a:active {
 }
 
 .atlas-cover {
-    width: 150px;
+    width: 240px;
     height: auto;
     display: block;
 }
@@ -347,7 +347,7 @@ a:visited {
     }
 
     .atlas-cover {
-        width: 100px;
+        width: 200px;
         /* Reduce atlas cover size */
     }
 }
