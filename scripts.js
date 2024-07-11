@@ -176,7 +176,7 @@ map.on('load', function () {
                 <b>${stateName} HUD CDBG Total:</b> ${formattedStateCdbgTotal}<br>
                 <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
                 <p class="namelsad">Atlas of Disaster Report</p>
-                <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
+                <p>Click below to read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
                 <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
             </div>
             <div class="popup-column">
@@ -252,7 +252,7 @@ map.on('load', function () {
 
 
 
-    
+
     // Initialize the geocoder
     var geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -336,7 +336,7 @@ map.on('load', function () {
                 <b>${stateName} HUD CDBG Total:</b> ${formattedStateCdbgTotal}<br>
                 <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
                 <p class="namelsad">Atlas of Disaster Report</p>
-                <p>Read the Atlas of Disaster: ${stateName} to learn more.</p>
+                <p>Click below to read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
                 <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
             </div>
             <div class="popup-column">
