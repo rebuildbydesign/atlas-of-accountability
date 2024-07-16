@@ -14,14 +14,28 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Determine the initial zoom level based on the screen width
-const initialZoom = window.innerWidth < 768 ? 3 : 3.7;  // Zoom level 3 for mobile, 4 for desktop
+const initialZoom = window.innerWidth < 768 ? 3 : 4;  // Zoom level 3 for mobile, 4 for desktop
 
+// CLIP TO NORTH AMERICA ONLY FOR AMY LOL
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/j00by/clvx7jcp006zv01ph3miketyz',
-    center: [-97.97135, 38.13880],
-    zoom: initialZoom
+    center: [-96.68288, 39.32267],
+    zoom: initialZoom,
+    maxBounds: [
+        [-179.0, 15.0],  // Southwest coordinates (including Hawaii)
+        [-50.0, 60.0]    // Northeast coordinates (trimming more of Europe and South America)
+    ],
+    projection: {
+        name: 'albers',
+        center: [-96.68288, 39.32267],
+        parallels: [29.5, 45.5]
+    }
 });
+
+
+
+
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
@@ -254,73 +268,75 @@ map.on('load', function () {
 
 
     // Initialize the geocoder
-    var geocoder = new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl,
-        marker: false,
-        placeholder: 'Search Address',
-        zoom: 9,
-        bbox: [-124.848974, 24.396308, -66.93457, 49.384358]
-    });
+var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    marker: false,
+    placeholder: 'Search Address',
+    zoom: 9,
+    bbox: [-124.848974, 24.396308, -66.93457, 49.384358]
+});
 
-    // Add the geocoder to the map
-    map.addControl(geocoder, 'bottom-left');
+// Add the geocoder to the map
+map.addControl(geocoder, 'bottom-left');
 
-    // Handle the result event from the geocoder
-    geocoder.on('result', function (e) {
-        var lngLat = e.result.geometry.coordinates;
+// Handle the result event from the geocoder
+geocoder.on('result', function (e) {
+    var lngLat = e.result.geometry.coordinates;
 
-        window.setTimeout(function () {
-            if (popup.isOpen()) {
-                popup.remove();
-            }
+    // Wait for the map to be idle before processing the result
+    map.once('idle', function () {
+        if (popup.isOpen()) {
+            popup.remove();
+        }
 
-            var femaFeatures = map.queryRenderedFeatures(e.point, { layers: ['atlas-fema-layer'] });
-            var congressFeatures = map.queryRenderedFeatures(e.point, { layers: ['congress-layer'] });
+        // Query features at the geographical coordinates
+        var femaFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['atlas-fema-layer'] });
+        var congressFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['congress-layer'] });
 
-            if (!femaFeatures.length || !congressFeatures.length) {
-                return;
-            }
+        if (!femaFeatures.length || !congressFeatures.length) {
+            return;
+        }
 
-            var femaFeature = femaFeatures[0].properties;
-            var congressFeature = congressFeatures[0].properties;
+        var femaFeature = femaFeatures[0].properties;
+        var congressFeature = congressFeatures[0].properties;
 
-            var stateName = femaFeature.STATE_NAME;
-            var countyName = femaFeature.COUNTY_NAME;
-            var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
-            var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
-            var party = congressFeature.PARTY;
-            var repImage = congressFeature.PHOTOURL;
-            var websiteUrl = congressFeature.WEBSITEURL;
-            var facebookUrl = congressFeature.FACE_BOOK_;
-            var twitterUrl = congressFeature.TWITTER_UR;
-            var instagramUrl = congressFeature.INSTAGRAM_;
-            var senator1 = congressFeature.SENATOR1;
-            var sen1party = congressFeature.SENATOR1_PARTY;
-            var senator1Url = congressFeature.SENATOR1_URL;
-            var senator2 = congressFeature.SENATOR2;
-            var sen2party = congressFeature.SENATOR2_PARTY;
-            var senator2Url = congressFeature.SENATOR2_URL;
-            var atlasUrl = congressFeature.ATLAS_URL;
-            var atlasCover = congressFeature.ATLAS_COVER;
+        var stateName = femaFeature.STATE_NAME;
+        var countyName = femaFeature.COUNTY_NAME;
+        var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
+        var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
+        var party = congressFeature.PARTY;
+        var repImage = congressFeature.PHOTOURL;
+        var websiteUrl = congressFeature.WEBSITEURL;
+        var facebookUrl = congressFeature.FACE_BOOK_;
+        var twitterUrl = congressFeature.TWITTER_UR;
+        var instagramUrl = congressFeature.INSTAGRAM_;
+        var senator1 = congressFeature.SENATOR1;
+        var sen1party = congressFeature.SENATOR1_PARTY;
+        var senator1Url = congressFeature.SENATOR1_URL;
+        var senator2 = congressFeature.SENATOR2;
+        var sen2party = congressFeature.SENATOR2_PARTY;
+        var senator2Url = congressFeature.SENATOR2_URL;
+        var atlasUrl = congressFeature.ATLAS_URL;
+        var atlasCover = congressFeature.ATLAS_COVER;
 
-            // Debugging step: log the atlasUrl to the console
-            console.log(`Atlas URL for ${countyName}, ${stateName}: ${atlasUrl}`);
+        // Debugging step: log the atlasUrl to the console
+        console.log(`Atlas URL for ${countyName}, ${stateName}: ${atlasUrl}`);
 
-            var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
-            var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
-            var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
-            var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
-            var statePerCapita = femaFeature.STATE_PER_CAPITA;
+        var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
+        var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
+        var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
+        var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
+        var statePerCapita = femaFeature.STATE_PER_CAPITA;
 
-            var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedCountyPerCapita = `$${Number(countyPerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
+        var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedCountyPerCapita = `$${Number(countyPerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
 
-            var popupContent = `
+        var popupContent = `
         <div class="popup-container">
             <div class="popup-column">
                 <h3>${countyName}, ${stateName}</h3>
@@ -369,12 +385,14 @@ map.on('load', function () {
                 </div>
             </div>
         </div>
-            `;
+        `;
 
-            // Set new content and open the popup at the searched location
-            popup.setLngLat(lngLat)
-                .setHTML(popupContent)
-                .addTo(map);
-        }, 300);
+        // Set new content and open the popup at the searched location
+        popup.setLngLat(lngLat)
+            .setHTML(popupContent)
+            .addTo(map);
     });
+});
+
+    
 });
