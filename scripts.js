@@ -277,14 +277,15 @@ var nudgeTimeout = setTimeout(function() {
     geocoderContainer.classList.add('nudge');
 }, 5000);
 
-// Remove the nudge animation on user interaction
-map.on('mousemove', function() {
-    clearTimeout(nudgeTimeout);
-    geocoderContainer.classList.remove('nudge');
-    nudgeTimeout = setTimeout(function() {
-        geocoderContainer.classList.add('nudge');
-    }, 5000);
-});
+    // Remove the nudge animation on user interaction
+    function removeNudgeOnInteraction() {
+        clearTimeout(nudgeTimeout);
+        geocoderContainer.classList.remove('nudge');
+        map.off('mousemove', removeNudgeOnInteraction); // Remove the event listener after the first interaction
+    }
+
+    map.on('mousemove', removeNudgeOnInteraction);
+
 
 // Handle the result event from the geocoder
 geocoder.on('result', function (e) {
