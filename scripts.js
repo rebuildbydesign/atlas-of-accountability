@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Determine the initial zoom level based on the screen width
-const initialZoom = window.innerWidth < 768 ? 1 : 4;  // Zoom level 3 for mobile, 4 for desktop
+const initialZoom = window.innerWidth < 768 ? 2 : 4;  // Zoom level 3 for mobile, 4 for desktop
 
 // CLIP TO NORTH AMERICA ONLY FOR AMY LOL
 const map = new mapboxgl.Map({
