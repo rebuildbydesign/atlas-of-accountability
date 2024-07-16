@@ -1,17 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiajAwYnkiLCJhIjoiY2x1bHUzbXZnMGhuczJxcG83YXY4czJ3ayJ9.S5PZpU9VDwLMjoX_0x5FDQ';
 
-// HIDE TITLE IF USING AN IFRAME FOR WORDPRESS
-document.addEventListener("DOMContentLoaded", function () {
-    if (window.location !== window.parent.location) {
-        // The page is in an iframe
-        var titleElement = document.querySelector('.css-atlas-title');
-        if (titleElement) {
-            titleElement.style.display = 'none';
-        }
-    } else {
-        // The page is not in an iframe, do nothing
-    }
-});
+
 
 // Determine the initial zoom level based on the screen width
 const initialZoom = window.innerWidth < 768 ? 2.5 : 4;  // Zoom level 3 for mobile, 4 for desktop
