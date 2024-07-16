@@ -5,6 +5,7 @@ body {
     font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-style: normal;
+    color:#000;
 }
 
 /* Custom header and link colors */
@@ -359,3 +360,4 @@ a:visited {
         /* Smaller font size */
     }
 }
+

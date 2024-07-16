@@ -267,12 +267,12 @@ map.on('load', function () {
 
 
 
-    // Initialize the geocoder
+  // Initialize the geocoder
 var geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
     mapboxgl: mapboxgl,
     marker: false,
-    placeholder: 'Search Address',
+    placeholder: 'Search Address For Elected Officials',
     zoom: 9,
     bbox: [-124.848974, 24.396308, -66.93457, 49.384358]
 });
@@ -280,8 +280,28 @@ var geocoder = new MapboxGeocoder({
 // Add the geocoder to the map
 map.addControl(geocoder, 'bottom-left');
 
+// Get the geocoder container element
+var geocoderContainer = document.querySelector('.mapboxgl-ctrl-geocoder');
+
+// Add the nudge animation after 5 seconds of inactivity
+var nudgeTimeout = setTimeout(function() {
+    geocoderContainer.classList.add('nudge');
+}, 5000);
+
+// Remove the nudge animation on user interaction
+map.on('mousemove', function() {
+    clearTimeout(nudgeTimeout);
+    geocoderContainer.classList.remove('nudge');
+    nudgeTimeout = setTimeout(function() {
+        geocoderContainer.classList.add('nudge');
+    }, 5000);
+});
+
 // Handle the result event from the geocoder
 geocoder.on('result', function (e) {
+    // User interacted with the geocoder
+    clearTimeout(nudgeTimeout);
+    geocoderContainer.classList.remove('nudge');
     var lngLat = e.result.geometry.coordinates;
 
     // Wait for the map to be idle before processing the result
