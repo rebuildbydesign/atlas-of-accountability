@@ -43,7 +43,7 @@ map.on('load', function () {
     // Load the GeoJSON file for Atlas_FEMA
     map.addSource('atlas-fema', {
         type: 'geojson',
-        data: 'data/Atlas_FEMA2.json'
+        data: 'data/Atlas_FEMA.json'
     });
 
     // Add a layer for the Atlas_FEMA data
@@ -256,26 +256,26 @@ map.on('load', function () {
 
 
 
-  // Initialize the geocoder
-var geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    mapboxgl: mapboxgl,
-    marker: false,
-    placeholder: 'Search Address For Elected Officials',
-    zoom: 7.5,
-    bbox: [-124.848974, 24.396308, -66.93457, 49.384358]
-});
+    // Initialize the geocoder
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        marker: false,
+        placeholder: 'Search Address For Elected Officials',
+        zoom: 7.5,
+        bbox: [-124.848974, 24.396308, -66.93457, 49.384358]
+    });
 
-// Add the geocoder to the map
-map.addControl(geocoder, 'bottom-left');
+    // Add the geocoder to the map
+    map.addControl(geocoder, 'bottom-left');
 
-// Get the geocoder container element
-var geocoderContainer = document.querySelector('.mapboxgl-ctrl-geocoder');
+    // Get the geocoder container element
+    var geocoderContainer = document.querySelector('.mapboxgl-ctrl-geocoder');
 
-// Add the nudge animation after 5 seconds of inactivity
-var nudgeTimeout = setTimeout(function() {
-    geocoderContainer.classList.add('nudge');
-}, 5000);
+    // Add the nudge animation after 5 seconds of inactivity
+    var nudgeTimeout = setTimeout(function () {
+        geocoderContainer.classList.add('nudge');
+    }, 5000);
 
     // Remove the nudge animation on user interaction
     function removeNudgeOnInteraction() {
@@ -287,66 +287,66 @@ var nudgeTimeout = setTimeout(function() {
     map.on('mousemove', removeNudgeOnInteraction);
 
 
-// Handle the result event from the geocoder
-geocoder.on('result', function (e) {
-    // User interacted with the geocoder
-    clearTimeout(nudgeTimeout);
-    geocoderContainer.classList.remove('nudge');
-    var lngLat = e.result.geometry.coordinates;
+    // Handle the result event from the geocoder
+    geocoder.on('result', function (e) {
+        // User interacted with the geocoder
+        clearTimeout(nudgeTimeout);
+        geocoderContainer.classList.remove('nudge');
+        var lngLat = e.result.geometry.coordinates;
 
-    // Wait for the map to be idle before processing the result
-    map.once('idle', function () {
-        if (popup.isOpen()) {
-            popup.remove();
-        }
+        // Wait for the map to be idle before processing the result
+        map.once('idle', function () {
+            if (popup.isOpen()) {
+                popup.remove();
+            }
 
-        // Query features at the geographical coordinates
-        var femaFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['atlas-fema-layer'] });
-        var congressFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['congress-layer'] });
+            // Query features at the geographical coordinates
+            var femaFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['atlas-fema-layer'] });
+            var congressFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['congress-layer'] });
 
-        if (!femaFeatures.length || !congressFeatures.length) {
-            return;
-        }
+            if (!femaFeatures.length || !congressFeatures.length) {
+                return;
+            }
 
-        var femaFeature = femaFeatures[0].properties;
-        var congressFeature = congressFeatures[0].properties;
+            var femaFeature = femaFeatures[0].properties;
+            var congressFeature = congressFeatures[0].properties;
 
-        var stateName = femaFeature.STATE_NAME;
-        var countyName = femaFeature.COUNTY_NAME;
-        var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
-        var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
-        var party = congressFeature.PARTY;
-        var repImage = congressFeature.PHOTOURL;
-        var websiteUrl = congressFeature.WEBSITEURL;
-        var facebookUrl = congressFeature.FACE_BOOK_;
-        var twitterUrl = congressFeature.TWITTER_UR;
-        var instagramUrl = congressFeature.INSTAGRAM_;
-        var senator1 = congressFeature.SENATOR1;
-        var sen1party = congressFeature.SENATOR1_PARTY;
-        var senator1Url = congressFeature.SENATOR1_URL;
-        var senator2 = congressFeature.SENATOR2;
-        var sen2party = congressFeature.SENATOR2_PARTY;
-        var senator2Url = congressFeature.SENATOR2_URL;
-        var atlasUrl = congressFeature.ATLAS_URL;
-        var atlasCover = congressFeature.ATLAS_COVER;
+            var stateName = femaFeature.STATE_NAME;
+            var countyName = femaFeature.COUNTY_NAME;
+            var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
+            var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
+            var party = congressFeature.PARTY;
+            var repImage = congressFeature.PHOTOURL;
+            var websiteUrl = congressFeature.WEBSITEURL;
+            var facebookUrl = congressFeature.FACE_BOOK_;
+            var twitterUrl = congressFeature.TWITTER_UR;
+            var instagramUrl = congressFeature.INSTAGRAM_;
+            var senator1 = congressFeature.SENATOR1;
+            var sen1party = congressFeature.SENATOR1_PARTY;
+            var senator1Url = congressFeature.SENATOR1_URL;
+            var senator2 = congressFeature.SENATOR2;
+            var sen2party = congressFeature.SENATOR2_PARTY;
+            var senator2Url = congressFeature.SENATOR2_URL;
+            var atlasUrl = congressFeature.ATLAS_URL;
+            var atlasCover = congressFeature.ATLAS_COVER;
 
-        // Debugging step: log the atlasUrl to the console
-        console.log(`Atlas URL for ${countyName}, ${stateName}: ${atlasUrl}`);
+            // Debugging step: log the atlasUrl to the console
+            console.log(`Atlas URL for ${countyName}, ${stateName}: ${atlasUrl}`);
 
-        var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
-        var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
-        var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
-        var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
-        var statePerCapita = femaFeature.STATE_PER_CAPITA;
+            var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
+            var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
+            var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
+            var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
+            var statePerCapita = femaFeature.STATE_PER_CAPITA;
 
-        var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedCountyPerCapita = `$${Number(countyPerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
+            var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedCountyPerCapita = `$${Number(countyPerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
 
-        var popupContent = `
+            var popupContent = `
         <div class="popup-container">
             <div class="popup-column">
                 <h3>${countyName}, ${stateName}</h3>
@@ -397,12 +397,12 @@ geocoder.on('result', function (e) {
         </div>
         `;
 
-        // Set new content and open the popup at the searched location
-        popup.setLngLat(lngLat)
-            .setHTML(popupContent)
-            .addTo(map);
+            // Set new content and open the popup at the searched location
+            popup.setLngLat(lngLat)
+                .setHTML(popupContent)
+                .addTo(map);
+        });
     });
-});
 
-    
+
 });
