@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiajAwYnkiLCJhIjoiY2x1bHUzbXZnMGhuczJxcG83YXY4c
 
 
 // Determine the initial zoom level based on the screen width
-const initialZoom = window.innerWidth < 768 ? 2.5 : 3.4;  // Zoom level 3 for mobile, 4 for desktop
+const initialZoom = window.innerWidth < 768 ? 2.5 : 3.5;  // Zoom level 3 for mobile, 4 for desktop
 
 // CLIP TO NORTH AMERICA ONLY FOR AMY LOL
 const map = new mapboxgl.Map({
@@ -263,7 +263,13 @@ map.on('load', function () {
         marker: false,
         placeholder: 'Search Address For Elected Officials',
         zoom: 7.5,
-        bbox: [-124.848974, 24.396308, -66.93457, 49.384358]
+        bbox: [-124.848974, 24.396308, -66.93457, 49.384358],
+        flyTo: {
+            bearing: 0,
+            speed: 1.5,  // Transition speed (default is 1.2)
+            curve: 1,   // Smoothness of the transition (default is 1.42)
+            easing: function (t) { return t; }  // Custom easing function
+        }
     });
 
     // Add the geocoder to the map
