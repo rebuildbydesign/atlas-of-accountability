@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiajAwYnkiLCJhIjoiY2x1bHUzbXZnMGhuczJxcG83YXY4c
 
 
 // Determine the initial zoom level based on the screen width
-const initialZoom = window.innerWidth < 768 ? 2.5 : 3.5;  // Zoom level 3 for mobile, 4 for desktop
+const initialZoom = window.innerWidth < 768 ? 2.5 : 3.8;  // Zoom level 3 for mobile, 4 for desktop
 
 // CLIP TO NORTH AMERICA ONLY FOR AMY LOL
 const map = new mapboxgl.Map({
