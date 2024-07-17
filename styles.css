@@ -5,7 +5,7 @@ body {
     font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-style: normal;
-    color:#000;
+    color: #000;
 }
 
 /* Custom header and link colors */
@@ -33,7 +33,6 @@ a:active {
     width: 100%;
 }
 
-
 /* Atlas title top center */
 .css-atlas-title {
     position: absolute;
@@ -43,21 +42,15 @@ a:active {
     z-index: 1000;
     pointer-events: none;
     width: 80%;
-    /* Sets maximum width of the div to 80% of its parent */
     max-width: 600px;
-    /* Logo will not stretch more than 600px */
 }
 
 .css-atlas-title img {
     width: 95%;
-    /* Makes the image use all available space in the div */
     height: auto;
-    /* Keeps the aspect ratio of the image */
 }
 
-
-
-/* Legend bottom left */
+/* Existing legend styles */
 #legend {
     position: absolute;
     bottom: 23px;
@@ -96,6 +89,22 @@ a:active {
     font-weight: bold;
 }
 
+/* New legend item styles */
+.legend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.legend-rectangle {
+    width: 40px;
+    height: 15px;
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+
 /* Information icon top left for methodology */
 #info-icon:hover {
     opacity: 0.8;
@@ -111,16 +120,13 @@ a:active {
     border-radius: 8px;
     max-width: 400px;
     max-height: 800px;
-    /* Maximum height of the panel */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-style: normal;
     font-size: calc(10px + 0.2vw);
-    /* Responsive font size */
     overflow-y: auto;
-    /* Enables vertical scrolling if content is too tall */
 }
 
 /* Toggle DISASTER DATA */
@@ -133,40 +139,19 @@ a:active {
     color: #de2d26;
 }
 
-/* Responsive styles for mobile devices */
-@media (max-width: 480px) {
-    .css-atlas-title {
-        top: 5px;
-        /* Adjusted for better visibility */
-        width: 90%;
-        /* More screen usage */
-    }
-    .toggle-counties {
-        font-size: 12px;
-    }
-
-}
-
-
 /* POP UP DESIGN */
-
-
 .popup-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     z-index: 9999;
-    /* Ensure popup is on top */
     position: relative;
-    /* Ensure positioning context */
     width: 500px;
-    /* Adjust this value to your desired width */
 }
 
 @font-face {
     font-family: 'RBDBoldOutlined';
     src: url('https://judyhuynh.ca/RBDBoldOutlined.ttf') format('truetype');
-    /* Change the format if needed */
     font-weight: normal;
     font-style: normal;
 }
@@ -241,7 +226,6 @@ a:active {
     display: flex;
     align-items: center;
     gap: 30px;
-    /* Add gap between profile pic and social links */
 }
 
 .social-links {
@@ -249,7 +233,6 @@ a:active {
     flex-direction: column;
     align-items: center;
     gap: 7px;
-    /* Reduce gap between icons */
 }
 
 .social-links img {
@@ -280,23 +263,17 @@ a:active {
     .popup-container {
         display: flex;
         flex-direction: column;
-        /* Stack columns vertically on smaller screens */
         width: 100%;
-        /* Make popup full width on small screens */
         padding: 5px;
-        /* Add padding to the container */
     }
 
     .popup-column {
         width: 100%;
-        /* Make each column take full width */
         margin-bottom: 0px;
-        /* Add some space between columns */
     }
 
     .disaster-count .count {
         font-size: 35px;
-        /* Reduce font size for disaster count */
     }
 
     .disaster-count .count-description {
@@ -306,58 +283,63 @@ a:active {
     .rep-info,
     .senator-info {
         flex-direction: column;
-        /* Stack representative and senator info vertically */
         align-items: flex-start;
-        /* Align items to the start */
         gap: 8px;
-        /* Add some space between elements */
     }
 
     .rep-image {
         width: 100px;
-        /* Reduce image size */
         height: 100px;
-        /* Maintain aspect ratio */
     }
 
     .senator-image {
         width: 70px;
-        /* Reduce image size */
         height: 70px;
-        /* Maintain aspect ratio */
     }
 
     .social-links {
         flex-direction: row;
-        /* Arrange social links in a row */
         gap: 8px;
-        /* Add space between social icons */
     }
 
     .popup-column h3 {
         font-size: 13px;
-        /* Adjust heading font size */
     }
 
     .popup-column p,
     .popup-column b,
     a:link,
-a:visited {
+    a:visited {
         font-size: 12px;
-        /* Adjust paragraph and bold text font size */
     }
 
     .atlas-cover {
         width: 200px;
-        /* Reduce atlas cover size */
     }
 }
 
-/* Adjust the font size of the methodology panel for mobile */
+/* Responsive styles for mobile devices */
 @media (max-width: 480px) {
-    #info-panel {
-        font-size: calc(9px + 0.2vw);
-        /* Smaller font size */
+    #legend {
+        width: 200px;
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .color-bar {
+        height: 20px;
+    }
+
+    .color-description {
+        font-size: 8px;
+    }
+
+    .legend-item {
+        font-size: 10px;
+    }
+
+    .legend-rectangle {
+        width: 20px;
+        height: 10px;
     }
 }
-

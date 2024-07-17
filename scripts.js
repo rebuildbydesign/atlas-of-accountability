@@ -262,7 +262,7 @@ var geocoder = new MapboxGeocoder({
     mapboxgl: mapboxgl,
     marker: false,
     placeholder: 'Search Address For Elected Officials',
-    zoom: 9,
+    zoom: 7.5,
     bbox: [-124.848974, 24.396308, -66.93457, 49.384358]
 });
 
