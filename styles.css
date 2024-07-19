@@ -146,14 +146,7 @@ a:active {
     gap: 20px;
     z-index: 9999;
     position: relative;
-    width: 500px;
-}
-
-@font-face {
-    font-family: 'RBDBoldOutlined';
-    src: url('https://judyhuynh.ca/RBDBoldOutlined.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+    width: 100%;
 }
 
 .popup-column {
@@ -261,53 +254,65 @@ a:active {
 /* Mobile Responsive Design */
 @media (max-width: 400px) {
     .popup-container {
-        width: 60%; /* Shrink to 60% of the original width for better mobile fit */
+        width: 100%; /* Use 100% width for better fit on mobile */
     }
     .popup-column {
-        flex: 1 1 100%; /* Ensure columns stack on mobile */
+        flex: 1 1 45%; /* Allow columns to wrap */
     }
     .popup-column h3 {
-        font-size: 12px; /* Adjust font size for better readability on smaller screens */
+        font-size: 9.8px; /* Adjust font size for better readability on smaller screens */
     }
     .disaster-count .count {
-        font-size: 20px; /* Adjust font size for better readability on smaller screens */
+        font-size: 14px; /* Adjust font size for better readability on smaller screens */
     }
     .disaster-count .count-description {
-        font-size: 10px; /* Adjust font size for better readability on smaller screens */
+        font-size: 8.4px; /* Adjust font size for better readability on smaller screens */
     }
     .namelsad {
-        font-size: 10px; /* Adjust font size for better readability on smaller screens */
+        font-size: 8.4px; /* Adjust font size for better readability on smaller screens */
     }
     .table-cell {
-        padding: 3px; /* Reduce padding for better fit on smaller screens */
+        padding: 3.5px; /* Ensure padding fits within the smaller screen */
     }
     .atlas-cover {
-        width: 144px; /* Adjust image size to fit the shrunken popup */
+        width: 100.8px; /* Adjust image size to fit within the smaller popup */
     }
     .rep-image {
-        width: 90px; /* Adjust image size to fit the shrunken popup */
-        height: 90px; /* Adjust image size to fit the shrunken popup */
+        width: 63px; /* Adjust image size to fit within the smaller popup */
+        height: 63px; /* Adjust image size to fit within the smaller popup */
     }
     .senator-image {
-        width: 45px; /* Adjust image size to fit the shrunken popup */
-        height: 45px; /* Adjust image size to fit the shrunken popup */
+        width: 31.5px; /* Adjust image size to fit within the smaller popup */
+        height: 31.5px; /* Adjust image size to fit within the smaller popup */
     }
     #legend {
-        width: 200px;
-        padding: 1px;
-        font-size: 10px;
+        width: 140px;
+        padding: 0.7px;
+        font-size: 7px;
     }
     .color-bar {
-        height: 20px;
+        height: 14px;
     }
     .color-description {
-        font-size: 8px;
+        font-size: 5.6px;
     }
     .legend-item {
-        font-size: 10px;
+        font-size: 7px;
     }
     .legend-rectangle {
-        width: 20px;
-        height: 10px;
+        width: 14px;
+        height: 7px;
+    }
+    p {
+        font-size: 8.4px; /* Adjust font size for paragraphs */
+    }
+    b {
+        font-size: 8.4px; /* Adjust font size for bold text */
+    }
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+        font-size: 8.4px; /* Adjust font size for links */
     }
 }
