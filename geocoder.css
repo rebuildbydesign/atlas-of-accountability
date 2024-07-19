@@ -228,17 +228,17 @@
 }
 
 /* Media queries */
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 480px) {
     .mapboxgl-ctrl-geocoder.mapboxgl-ctrl-geocoder--collapsed {
         width: 36px;
         min-width: 36px;
     }
 
     .mapboxgl-ctrl-geocoder {
-        width: 33.3333%;
+        width: 100px;
         font-size: 15px;
         line-height: 20px;
-        max-width: 360px;
+        max-width: 100px;
     }
 
     .mapboxgl-ctrl-geocoder .suggestions {
