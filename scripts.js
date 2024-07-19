@@ -149,7 +149,7 @@ map.on('load', function () {
             'line-color': '#000', // Black border color
             'line-width': 0.5
         }
-    }, 'state-label');
+    });
 
 
 
