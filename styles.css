@@ -53,9 +53,9 @@ a:active {
 /* Existing legend styles */
 #legend {
     position: absolute;
-    bottom: 23px;
-    right: 5px;
-    text-align: right;
+    bottom: 30px;
+    left: 10px; /* Moved to the bottom-left corner */
+    text-align: left; /* Align text to the left */
     z-index: 999;
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);
@@ -92,7 +92,7 @@ a:active {
 /* New legend item styles */
 .legend-item {
     display: flex;
-    justify-content: flex-end; /* Align items to the end */
+    justify-content: flex-start; /* Align items to the start */
     align-items: center;
     margin-top: 10px;
 }
@@ -102,8 +102,11 @@ a:active {
     height: 15px;
     background-color: #fff;
     border: 1px solid #000;
-    margin-left: 10px; /* Adjust the margin if needed for spacing */
+    margin-right: 10px; /* Adjust the margin if needed for spacing */
 }
+
+
+
 
 
 
@@ -262,17 +265,20 @@ a:active {
 }
 
 /* General popup container adjustments for mobile */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .popup-container {
         display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 5px;
+        flex-direction: wrap;
+        gap: 5px;
+        width: 90%; /* Reduce width to fit smaller screens */
+        max-width: 200px; /* Maximum width for popups on smaller screens */
+        padding: 1px;
+        position: relative;
     }
 
+
     .popup-column {
-        width: 100%;
-        margin-bottom: 0px;
+        flex: 1 1 45%;
     }
 
     .disaster-count .count {
@@ -280,7 +286,7 @@ a:active {
     }
 
     .disaster-count .count-description {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .rep-info,
@@ -291,8 +297,8 @@ a:active {
     }
 
     .rep-image {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
     }
 
     .senator-image {
@@ -306,14 +312,14 @@ a:active {
     }
 
     .popup-column h3 {
-        font-size: 13px;
+        font-size: 10px;
     }
 
     .popup-column p,
     .popup-column b,
     a:link,
     a:visited {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .atlas-cover {
@@ -325,7 +331,7 @@ a:active {
 @media (max-width: 480px) {
     #legend {
         width: 200px;
-        padding: 5px;
+        padding: 1px;
         font-size: 10px;
     }
 

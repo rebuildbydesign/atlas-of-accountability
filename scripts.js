@@ -315,7 +315,7 @@ map.on('load', function () {
     });
 
     // Add the geocoder to the map
-    map.addControl(geocoder, 'bottom-left');
+    map.addControl(geocoder, 'top-right');
 
     // Get the geocoder container element
     var geocoderContainer = document.querySelector('.mapboxgl-ctrl-geocoder');
