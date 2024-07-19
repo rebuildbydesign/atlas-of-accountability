@@ -27,9 +27,49 @@ const map = new mapboxgl.Map({
 
 
 // Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl());
+// map.addControl(new mapboxgl.NavigationControl());
 
+
+
+
+// LOAD MAPBOX
 map.on('load', function () {
+    // Custom code to fade text opacity for countries and states outside the US
+    const updateTextOpacity = (layerId, opacity) => {
+        if (map.getLayer(layerId)) {
+            map.setPaintProperty(layerId, 'text-opacity', [
+                'case',
+                // Check if the feature is a US state or the United States
+                ['any',
+                    ['==', ['get', 'name_en'], 'United States'],
+                    ['==', ['get', 'iso_3166_1'], 'US']
+                ],
+                1,
+                // Default opacity for all other countries and states
+                opacity
+            ]);
+        }
+    };
+
+    const layersToUpdate = [
+        'country-label-sm',
+        'country-label-md',
+        'country-label-lg',
+        'country-lavel',
+        'state-label' // Include state labels as well
+    ];
+
+    map.on('styledata', function () {
+        layersToUpdate.forEach(layerId => {
+            updateTextOpacity(layerId, 0.2);
+        });    
+    });
+
+
+
+
+
+
     // Ensure that the info-icon event listener is added after the map has fully loaded
     document.getElementById('info-icon').addEventListener('click', function () {
         var infoPanel = document.getElementById('info-panel');
@@ -39,6 +79,8 @@ map.on('load', function () {
             infoPanel.style.display = 'none';  // Hide the panel
         }
     });
+
+
 
     // Load the GeoJSON file for Atlas_FEMA
     map.addSource('atlas-fema', {
@@ -261,7 +303,7 @@ map.on('load', function () {
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
         marker: false,
-        placeholder: 'Search Address For Elected Officials',
+        placeholder: 'Search Address Here',
         zoom: 7.5,
         bbox: [-124.848974, 24.396308, -66.93457, 49.384358],
         flyTo: {
