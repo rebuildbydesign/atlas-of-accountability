@@ -259,7 +259,7 @@ a:active {
 }
 
 /* Mobile Responsive Design */
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .popup-container {
         width: 60%; /* Shrink to 60% of the original width for better mobile fit */
     }
