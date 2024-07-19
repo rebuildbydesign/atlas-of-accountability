@@ -69,10 +69,12 @@ map.on('load', function () {
 
 
 
+    // Display the info panel initially
+    var infoPanel = document.getElementById('info-panel');
+    infoPanel.style.display = 'block';
 
     // Ensure that the info-icon event listener is added after the map has fully loaded
     document.getElementById('info-icon').addEventListener('click', function () {
-        var infoPanel = document.getElementById('info-panel');
         if (infoPanel.style.display === 'none' || infoPanel.style.display === '') {
             infoPanel.style.display = 'block';  // Show the panel
         } else {
