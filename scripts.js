@@ -87,7 +87,7 @@ map.on('load', function () {
     // Load the GeoJSON file for Atlas_FEMA
     map.addSource('atlas-fema', {
         type: 'geojson',
-        data: 'data/Atlas_FEMA.json'
+        data: 'data/Atlas_FEMA3.json'
     });
 
     // Add a layer for the Atlas_FEMA data
@@ -173,7 +173,7 @@ map.on('load', function () {
         var congressFeature = congressFeatures[0].properties;
 
         var stateName = femaFeature.STATE_NAME;
-        var countyName = femaFeature.COUNTY_NAME;
+        var countyName = femaFeature.NAMELSAD;
         var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
         var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
         var party = congressFeature.PARTY;
