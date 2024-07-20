@@ -138,19 +138,16 @@ a:active {
     border: 0px;
     background-color: #000;
     overflow: hidden;
-  }
-  
-  .button, .button__icon, .button__text {
+}
+.button, .button__icon, .button__text {
     transition: all 0.3s;
-  }
-  
-  .button .button__text {
+}
+.button .button__text {
     transform: translateX(22px);
     color: #fff;
     font-weight: 600;
-  }
-  
-  .button .button__icon {
+}
+.button .button__icon {
     position: absolute;
     transform: translateX(109px);
     height: 100%;
@@ -159,33 +156,28 @@ a:active {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .button .svg {
+}
+.button .svg {
     width: 20px;
     fill: #fff;
-  }
-  
-  .button:hover {
+}
+.button:hover {
     background: #de2d26;
-  }
-  
-  .button:hover .button__text {
+}
+.button:hover .button__text {
     color: transparent;
-  }
-  
-  .button:hover .button__icon {
+}
+.button:hover .button__icon {
     width: 148px;
     transform: translateX(0);
-  }
-  
-  .button:active .button__icon {
+}
+.button:active .button__icon {
     background-color: #de2d26;
-  }
-  
-  .button:active {
+}
+.button:active {
     border: 1px solid #de2d26;
-  }
+}
+
   
 
 /* Toggle DISASTER DATA */
