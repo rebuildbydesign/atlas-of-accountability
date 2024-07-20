@@ -208,55 +208,55 @@ map.on('load', function () {
         var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
 
         var popupContent = `
-        <div class="popup-container">
-            <div class="popup-column">
-                <h3>${countyName}, ${stateName}</h3>
-                <div class="disaster-count">
-                    <div class="count">${disasterCount}</div>
-                    <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
-                </div>
-                <p class="namelsad">Post-Disaster Assistance</p>
-                <b>${countyName} FEMA Total:</b> ${formattedCountyFemaTotal}<br>
-                <b>${countyName} Per Capita:</b> ${formattedCountyPerCapita}<br>
-                <hr>
-                <b>${stateName} FEMA Total:</b> ${formattedStateFemaTotal}<br>
-                <b>${stateName} HUD CDBG Total:</b> ${formattedStateCdbgTotal}<br>
-                <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-                <p class="namelsad">Atlas of Disaster Report</p>
-                <p>Read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
-                <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+<div class="popup-container">
+    <div class="popup-column">
+        <h3>${countyName}, ${stateName}</h3>
+        <div class="disaster-count">
+            <div class="count">${disasterCount}</div>
+            <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
+        </div>
+        <p class="namelsad">Post-Disaster Assistance</p>
+        <b class="formatted-value">${countyName} FEMA Total:</b> <span class="formatted-value">${formattedCountyFemaTotal}</span><br>
+        <b class="formatted-value">${countyName} Per Capita:</b> <span class="formatted-value">${formattedCountyPerCapita}</span><br>
+        <hr>
+        <b class="formatted-value">${stateName} FEMA Total:</b> <span class="formatted-value">${formattedStateFemaTotal}</span><br>
+        <b class="formatted-value">${stateName} HUD CDBG Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
+        <b class="formatted-value">${stateName} Per Capita:</b> <span class="formatted-value">${formattedStatePerCapita}</span></p>
+        <p class="namelsad">Atlas of Disaster Report</p>
+        <p>Read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
+        <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+    </div>
+    <div class="popup-column">
+        <p class="namelsad">${congressFeature.NAMELSAD20}</p>
+        <h3>Congress Representative</h3>
+        <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
+        <div class="rep-info">
+            <img src="${repImage}" alt="Profile Picture" class="rep-image">
+            <div class="social-links">
+                <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+                <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+                <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+                <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
             </div>
-            <div class="popup-column">
-                <p class="namelsad">${congressFeature.NAMELSAD20}</p>
-                <h3>Congress Representative</h3>
-                <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
-                <div class="rep-info">
-                    <img src="${repImage}" alt="Profile Picture" class="rep-image">
-                    <div class="social-links">
-                        <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
-                        <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
-                        <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
-                        <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
-                    </div>
+        </div>
+        <h3>US Senators</h3>
+        <div class="senator-info">
+            <div class="senator-row">
+                <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
+                <div>
+                    <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
                 </div>
-                <h3>US Senators</h3>
-                <div class="senator-info">
-                    <div class="senator-row">
-                        <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
-                        <div>
-                            <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
-                        </div>
-                    </div>
-                    <div class="senator-row">
-                        <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
-                        <div>
-                            <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
-                        </div>
-                    </div>
+            </div>
+            <div class="senator-row">
+                <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
+                <div>
+                    <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
                 </div>
             </div>
         </div>
-        `;
+    </div>
+</div>
+`;
 
         popup.setLngLat(e.lngLat)
             .setHTML(popupContent)
@@ -397,55 +397,56 @@ map.on('load', function () {
             var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
 
             var popupContent = `
-        <div class="popup-container">
-            <div class="popup-column">
-                <h3>${countyName}, ${stateName}</h3>
-                <div class="disaster-count">
-                    <div class="count">${disasterCount}</div>
-                    <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
-                </div>
-                <p class="namelsad">Post-Disaster Assistance</p>
-                <b>${countyName} FEMA Total:</b> ${formattedCountyFemaTotal}<br>
-                <b>${countyName} Per Capita:</b> ${formattedCountyPerCapita}<br>
-                <hr>
-                <b>${stateName} FEMA Total:</b> ${formattedStateFemaTotal}<br>
-                <b>${stateName} HUD CDBG Total:</b> ${formattedStateCdbgTotal}<br>
-                <b>${stateName} Per Capita:</b> ${formattedStatePerCapita}</p>
-                <p class="namelsad">Atlas of Disaster Report</p>
-                <p>Read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
-                <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+<div class="popup-container">
+    <div class="popup-column">
+        <h3>${countyName}, ${stateName}</h3>
+        <div class="disaster-count">
+            <div class="count">${disasterCount}</div>
+            <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
+        </div>
+        <p class="namelsad">Post-Disaster Assistance</p>
+        <b class="formatted-value">${countyName} FEMA Total:</b> <span class="formatted-value">${formattedCountyFemaTotal}</span><br>
+        <b class="formatted-value">${countyName} Per Capita:</b> <span class="formatted-value">${formattedCountyPerCapita}</span><br>
+        <hr>
+        <b class="formatted-value">${stateName} FEMA Total:</b> <span class="formatted-value">${formattedStateFemaTotal}</span><br>
+        <b class="formatted-value">${stateName} HUD CDBG Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
+        <b class="formatted-value">${stateName} Per Capita:</b> <span class="formatted-value">${formattedStatePerCapita}</span></p>
+        <p class="namelsad">Atlas of Disaster Report</p>
+        <p>Read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
+        <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+    </div>
+    <div class="popup-column">
+        <p class="namelsad">${congressFeature.NAMELSAD20}</p>
+        <h3>Congress Representative</h3>
+        <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
+        <div class="rep-info">
+            <img src="${repImage}" alt="Profile Picture" class="rep-image">
+            <div class="social-links">
+                <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+                <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+                <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+                <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
             </div>
-            <div class="popup-column">
-                <p class="namelsad">${congressFeature.NAMELSAD20}</p>
-                <h3>Congress Representative</h3>
-                <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
-                <div class="rep-info">
-                    <img src="${repImage}" alt="Profile Picture" class="rep-image">
-                    <div class="social-links">
-                        <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
-                        <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
-                        <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
-                        <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
-                    </div>
+        </div>
+        <h3>US Senators</h3>
+        <div class="senator-info">
+            <div class="senator-row">
+                <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
+                <div>
+                    <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
                 </div>
-                <h3>US Senators</h3>
-                <div class="senator-info">
-                    <div class="senator-row">
-                        <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
-                        <div>
-                            <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
-                        </div>
-                    </div>
-                    <div class="senator-row">
-                        <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
-                        <div>
-                            <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
-                        </div>
-                    </div>
+            </div>
+            <div class="senator-row">
+                <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
+                <div>
+                    <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
                 </div>
             </div>
         </div>
-        `;
+    </div>
+</div>
+`;
+
 
             // Set new content and open the popup at the searched location
             popup.setLngLat(lngLat)
