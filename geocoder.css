@@ -227,68 +227,32 @@
     animation: nudge 0.5s ease-in-out infinite;
 }
 
-/* Media queries for mobile devices with a maximum width of 400px */
-@media (min-width: 400px) {
-    .mapboxgl-ctrl-geocoder.mapboxgl-ctrl-geocoder--collapsed {
-        width: 36px;
-        min-width: 36px;
-    }
-
+/* Mobile specific styles */
+@media (max-width: 390px) {
     .mapboxgl-ctrl-geocoder {
-        width: 100px;
-        font-size: 15px;
-        line-height: 20px;
-        max-width: 100px;
-    }
-
-    .mapboxgl-ctrl-geocoder .suggestions {
-        font-size: 13px;
-    }
-
-    .mapboxgl-ctrl-geocoder--icon {
-        top: 8px;
-    }
-
-    .mapboxgl-ctrl-geocoder--icon-close {
-        width: 16px;
-        height: 16px;
-        margin-top: 3px;
-        margin-right: 0;
-    }
-
-    .mapboxgl-ctrl-geocoder--icon-geolocate {
-        width: 18px;
-        height: 18px;
-        margin-top: 2px;
-        margin-right: 0;
-    }
-
-    .mapboxgl-ctrl-geocoder--icon-search {
-        left: 7px;
-        width: 20px;
-        height: 20px;
+        width: 280px; /* 30% reduction from 400px */
+        min-width: 210px; /* 30% reduction from 300px */
     }
 
     .mapboxgl-ctrl-geocoder--input {
-        height: 36px;
-        padding: 6px 35px;
+        height: 35px; /* 30% reduction from 50px */
+        font-size: 11px; /* 30% reduction from 16px */
+        padding: 10px; /* 30% reduction from 15px */
+        padding-left: 25px; /* 30% reduction from 35px */
     }
 
-    .mapboxgl-ctrl-geocoder--icon-loading {
-        width: 26px;
-        height: 26px;
-        margin-top: -2px;
-        margin-right: -5px;
+    .mapboxgl-ctrl-geocoder--icon-search {
+        top: 10px; /* Adjusted for smaller input */
+        left: 7px; /* Adjusted for smaller input */
+        width: 16px; /* 30% reduction from 23px */
+        height: 16px; /* 30% reduction from 23px */
     }
 
-    .mapbox-gl-geocoder--error {
-        color: #000;
-        padding: 6px 12px;
-        font-size: 16px;
-        text-align: center;
+    .mapboxgl-ctrl-geocoder .suggestions {
+        font-size: 11px; /* 30% reduction from 15px */
     }
 
-    .mapboxgl-ctrl-geocoder--powered-by {
-        font-size: 11px !important;
+    .mapboxgl-ctrl-geocoder .suggestions>li>a {
+        padding: 4px 8px; /* 30% reduction from 6px 12px */
     }
 }

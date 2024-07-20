@@ -222,7 +222,7 @@ a:active {
     font-size: 40px;
     color: #de2d26;
     padding-right: 10px;
-    font-family: 'RBDBoldOutlined', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'RBDBoldOutlined', 'Poppins', sans-serif;
 }
 
 .disaster-count .count-description {
@@ -325,10 +325,10 @@ a:active {
         font-size: 30px; /* Adjust font size for better readability on smaller screens */
     }
     .disaster-count .count-description {
-        font-size: 10px; /* Adjust font size for better readability on smaller screens */
+        font-size: 9px; /* Adjust font size for better readability on smaller screens */
     }
     .namelsad {
-        font-size: calc(8px + 0.2vw); /* Adjust font size for better readability on smaller screens */
+        font-size: 9px; /* Adjust font size for better readability on smaller screens */
         margin-bottom: 1px; /* Adjust margin for tighter spacing */
     }
     .table-cell {
@@ -346,21 +346,25 @@ a:active {
         width: 50px; /* Adjust image size to fit within the smaller popup */
         height: 50px; /* Adjust image size to fit within the smaller popup */
     }
+    .social-links img {
+        width: 16px;
+        height: 16px;
+    }
     p {
-        font-size: 10px; /* Adjust font size for paragraphs */
+        font-size: 9px; /* Adjust font size for paragraphs */
         margin-bottom: 2px; /* Adjust margin for tighter spacing */
     }
     b {
-        font-size: 10px; /* Adjust font size for bold text */
+        font-size: 9px; /* Adjust font size for bold text */
     }
     a:link,
     a:visited,
     a:hover,
     a:active {
-        font-size: 10px; /* Adjust font size for links */
+        font-size: 9px; /* Adjust font size for links */
     }
     .formatted-value {
-        font-size: 10px; /* Adjust font size for formatted values */
+        font-size: 9px; /* Adjust font size for formatted values */
     }
     .popup-container p {
         margin-bottom: 2px; /* Adjust margin for tighter spacing */
@@ -370,8 +374,8 @@ a:active {
         height: 30px;   /* Reduced by 25% */
     }
     .button .button__text {
-        transform: translateX(12px); /* Adjusted for smaller size */
-        font-size: 12px; /* Adjust font size for better readability on smaller screens */
+        transform: translateX(11px); /* Adjusted for smaller size */
+        font-size: 11px; /* Adjust font size for better readability on smaller screens */
     }
     .button .button__icon {
         transform: translateX(84px); /* Adjusted for smaller size */
@@ -383,16 +387,16 @@ a:active {
     #legend {
         width: 220px;
         padding: 4px;
-        font-size: 12px;
+        font-size: 10px;
     }
     .color-bar {
         height: 24px;
     }
     .color-description {
-        font-size: 12px;
+        font-size: 10px;
     }
     .legend-item {
-        font-size: 12px;
+        font-size: 10px;
     }
     .legend-rectangle {
         width: 30px;
