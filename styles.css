@@ -128,6 +128,65 @@ a:active {
     font-size: calc(10px + 0.2vw);
     overflow-y: auto;
 }
+.button {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 0px;
+    background-color: #000;
+    overflow: hidden;
+  }
+  
+  .button, .button__icon, .button__text {
+    transition: all 0.3s;
+  }
+  
+  .button .button__text {
+    transform: translateX(22px);
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .button .button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #de2d26;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button .svg {
+    width: 20px;
+    fill: #fff;
+  }
+  
+  .button:hover {
+    background: #de2d26;
+  }
+  
+  .button:hover .button__text {
+    color: transparent;
+  }
+  
+  .button:hover .button__icon {
+    width: 148px;
+    transform: translateX(0);
+  }
+  
+  .button:active .button__icon {
+    background-color: #de2d26;
+  }
+  
+  .button:active {
+    border: 1px solid #de2d26;
+  }
+  
 
 /* Toggle DISASTER DATA */
 #toggle-counties {
@@ -266,17 +325,17 @@ a:active {
         flex: 1 1 45%; /* Allow columns to stack on mobile */
     }
     .popup-column h3 {
-        font-size: 10px; /* Adjust font size for better readability on smaller screens */
+        font-size: calc(10px + 0.2vw); /* Adjust font size for better readability on smaller screens */
         margin-bottom: 3px; /* Adjust margin for tighter spacing */
     }
     .disaster-count .count {
         font-size: 30px; /* Adjust font size for better readability on smaller screens */
     }
     .disaster-count .count-description {
-        font-size: 9px; /* Adjust font size for better readability on smaller screens */
+        font-size: calc(10px + 0.2vw); /* Adjust font size for better readability on smaller screens */
     }
     .namelsad {
-        font-size: 9px; /* Adjust font size for better readability on smaller screens */
+        font-size: calc(10px + 0.2vw); /* Adjust font size for better readability on smaller screens */
         margin-bottom: 2px; /* Adjust margin for tighter spacing */
     }
     .table-cell {
@@ -295,37 +354,58 @@ a:active {
         height: 50px; /* Adjust image size to fit within the smaller popup */
     }
     #legend {
-        width: 200px;
-        padding: 0.7px;
-        font-size: 9px;
+        width: 220px;
+        padding: 4px;
+        font-size: calc(10px + 0.2vw);
     }
     .color-bar {
         height: 22px;
     }
     .color-description {
-        font-size: 9px;
+        font-size: calc(10px + 0.2vw);
     }
     .legend-item {
-        font-size: 9px;
+        font-size: calc(10px + 0.2vw);
     }
     .legend-rectangle {
         width: 20px;
         height: 10px;
     }
     p {
-        font-size: 9px; /* Adjust font size for paragraphs */
-        margin-bottom: 1px; /* Adjust margin for tighter spacing */
+        font-size: calc(10px + 0.2vw); /* Adjust font size for paragraphs */
+        margin-bottom: 3px; /* Adjust margin for tighter spacing */
     }
     b {
-        font-size: 9px; /* Adjust font size for bold text */
+        font-size: calc(10px + 0.2vw); /* Adjust font size for bold text */
     }
     a:link,
     a:visited,
     a:hover,
     a:active {
-        font-size: 9px; /* Adjust font size for links */
+        font-size: calc(10px + 0.2vw); /* Adjust font size for links */
     }
     .formatted-value {
-        font-size: 9px; /* Adjust font size for formatted values */
+        font-size: calc(10px + 0.2vw); /* Adjust font size for formatted values */
     }
+    .popup-container p {
+        margin-bottom: 3px; /* Adjust margin for tighter spacing */
+    }
+    .button {
+        width: 120px; /* Reduced by 25% */
+        height: 30px;   /* Reduced by 25% */
+      }
+    
+      .button .button__text {
+        transform: translateX(12px); /* Adjusted for smaller size */
+        font-size: 12px; /* Adjust font size for better readability on smaller screens */
+      }
+    
+      .button .button__icon {
+        transform: translateX(84px); /* Adjusted for smaller size */
+        width: 30px; /* Reduced by 25% */
+      }
+    
+      .button .svg {
+        width: 15px; /* Reduced by 25% */
+      }
 }

@@ -62,7 +62,7 @@ map.on('load', function () {
     map.on('styledata', function () {
         layersToUpdate.forEach(layerId => {
             updateTextOpacity(layerId, 0.2);
-        });    
+        });
     });
 
 
@@ -258,6 +258,7 @@ map.on('load', function () {
 </div>
 `;
 
+
         popup.setLngLat(e.lngLat)
             .setHTML(popupContent)
             .addTo(map);
@@ -446,6 +447,7 @@ map.on('load', function () {
     </div>
 </div>
 `;
+
 
 
             // Set new content and open the popup at the searched location
