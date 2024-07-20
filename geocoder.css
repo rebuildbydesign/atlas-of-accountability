@@ -228,7 +228,7 @@
 }
 
 /* Mobile specific styles */
-@media (max-width: 390px) {
+@media (max-width: 600px) {
     .mapboxgl-ctrl-geocoder {
         width: 280px; /* 30% reduction from 400px */
         min-width: 210px; /* 30% reduction from 300px */
