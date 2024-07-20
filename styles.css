@@ -357,6 +357,12 @@ a:active {
     b {
         font-size: 9px; /* Adjust font size for bold text */
     }
+    li {
+        font-size: 9px; /* Adjust font size for list items */
+    }
+    h2, h3 {
+        font-size: 11px; /* Adjust font size for h2 and h3 headers */
+    }
     a:link,
     a:visited,
     a:hover,
