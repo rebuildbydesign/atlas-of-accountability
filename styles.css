@@ -54,8 +54,10 @@ a:active {
 #legend {
     position: absolute;
     bottom: 30px;
-    left: 10px; /* Moved to the bottom-left corner */
-    text-align: left; /* Align text to the left */
+    left: 10px;
+    /* Moved to the bottom-left corner */
+    text-align: left;
+    /* Align text to the left */
     z-index: 999;
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);
@@ -92,7 +94,8 @@ a:active {
 /* New legend item styles */
 .legend-item {
     display: flex;
-    justify-content: flex-start; /* Align items to the start */
+    justify-content: flex-start;
+    /* Align items to the start */
     align-items: center;
     margin-top: 10px;
 }
@@ -102,7 +105,8 @@ a:active {
     height: 15px;
     background-color: #fff;
     border: 1px solid #000;
-    margin-right: 10px; /* Adjust the margin if needed for spacing */
+    margin-right: 10px;
+    /* Adjust the margin if needed for spacing */
 }
 
 /* Information icon top left for methodology */
@@ -128,6 +132,7 @@ a:active {
     font-size: calc(10px + 0.2vw);
     overflow-y: auto;
 }
+
 .button {
     position: relative;
     width: 200px;
@@ -139,14 +144,19 @@ a:active {
     background-color: #000;
     overflow: hidden;
 }
-.button, .button__icon, .button__text {
+
+.button,
+.button__icon,
+.button__text {
     transition: all 0.3s;
 }
+
 .button .button__text {
     transform: translateX(20px);
     color: #fff;
     font-weight: 600;
 }
+
 .button .button__icon {
     position: absolute;
     transform: translateX(154px);
@@ -157,28 +167,34 @@ a:active {
     align-items: center;
     justify-content: center;
 }
+
 .button .svg {
     width: 20px;
     fill: #fff;
 }
+
 .button:hover {
     background: #de2d26;
 }
+
 .button:hover .button__text {
     color: transparent;
 }
+
 .button:hover .button__icon {
     width: 200px;
     transform: translateX(0);
 }
+
 .button:active .button__icon {
     background-color: #de2d26;
 }
+
 .button:active {
     border: 1px solid #de2d26;
 }
 
-  
+
 
 /* Toggle DISASTER DATA */
 #toggle-counties {
@@ -198,7 +214,8 @@ a:active {
     z-index: 9999;
     position: relative;
     width: 100%;
-    max-width: 500px; /* Set a maximum width for the popup */
+    max-width: 500px;
+    /* Set a maximum width for the popup */
 }
 
 .popup-column {
@@ -209,13 +226,15 @@ a:active {
     border-bottom: 2px solid #000;
     padding-bottom: 5px;
     color: #000;
-    margin-bottom: 8.4px; /* Adjust margin for tighter spacing */
+    margin-bottom: 8.4px;
+    /* Adjust margin for tighter spacing */
 }
 
 .disaster-count {
     display: flex;
     align-items: center;
-    margin-bottom: 8.4px; /* Adjust margin for tighter spacing */
+    margin-bottom: 8.4px;
+    /* Adjust margin for tighter spacing */
 }
 
 .disaster-count .count {
@@ -234,7 +253,8 @@ a:active {
     color: #fff;
     background-color: #000;
     padding: 3px;
-    margin-bottom: 8.4px; /* Adjust margin for tighter spacing */
+    margin-bottom: 8.4px;
+    /* Adjust margin for tighter spacing */
 }
 
 .table {
@@ -259,7 +279,8 @@ a:active {
     width: 240px;
     height: auto;
     display: block;
-    margin-bottom: 8.4px; /* Adjust margin for tighter spacing */
+    margin-bottom: 8.4px;
+    /* Adjust margin for tighter spacing */
 }
 
 .rep-image {
@@ -297,7 +318,8 @@ a:active {
 .senator-row {
     display: flex;
     align-items: center;
-    margin-bottom: 8.4px; /* Adjust margin for tighter spacing */
+    margin-bottom: 8.4px;
+    /* Adjust margin for tighter spacing */
 }
 
 .senator-image {
@@ -311,104 +333,167 @@ a:active {
 /* Mobile Responsive Design */
 @media (max-width: 400px) {
     .popup-container {
-        width: 100%; /* Use 100% width for better fit on mobile */
-        max-width: 300px; /* Adjust maximum width for mobile */
+        width: 100%;
+        /* Use 100% width for better fit on mobile */
+        max-width: 300px;
+        /* Adjust maximum width for mobile */
     }
+
     .popup-column {
-        flex: 1 1 45%; /* Allow columns to stack on mobile */
+        flex: 1 1 45%;
+        /* Allow columns to stack on mobile */
     }
+
     .popup-column h3 {
-        font-size: calc(8px + 0.2vw); /* Adjust font size for better readability on smaller screens */
-        margin-bottom: 2px; /* Adjust margin for tighter spacing */
+        font-size: calc(8px + 0.2vw);
+        /* Adjust font size for better readability on smaller screens */
+        margin-bottom: 2px;
+        /* Adjust margin for tighter spacing */
     }
+
     .disaster-count .count {
-        font-size: 30px; /* Adjust font size for better readability on smaller screens */
+        font-size: 30px;
+        /* Adjust font size for better readability on smaller screens */
     }
+
     .disaster-count .count-description {
-        font-size: 9px; /* Adjust font size for better readability on smaller screens */
+        font-size: 9px;
+        /* Adjust font size for better readability on smaller screens */
     }
+
     .namelsad {
-        font-size: 9px; /* Adjust font size for better readability on smaller screens */
-        margin-bottom: 1px; /* Adjust margin for tighter spacing */
+        font-size: 9px;
+        /* Adjust font size for better readability on smaller screens */
+        margin-bottom: 1px;
+        /* Adjust margin for tighter spacing */
     }
+
     .table-cell {
-        padding: 2px; /* Ensure padding fits within the smaller screen */
+        padding: 2px;
+        /* Ensure padding fits within the smaller screen */
     }
+
     .atlas-cover {
-        width: 130px; /* Adjust image size to fit within the smaller popup */
-        margin-bottom: 1px; /* Adjust margin for tighter spacing */
+        width: 130px;
+        /* Adjust image size to fit within the smaller popup */
+        margin-bottom: 1px;
+        /* Adjust margin for tighter spacing */
     }
+
     .rep-image {
-        width: 90px; /* Adjust image size to fit within the smaller popup */
-        height: 90px; /* Adjust image size to fit within the smaller popup */
+        width: 90px;
+        /* Adjust image size to fit within the smaller popup */
+        height: 90px;
+        /* Adjust image size to fit within the smaller popup */
     }
+
     .senator-image {
-        width: 50px; /* Adjust image size to fit within the smaller popup */
-        height: 50px; /* Adjust image size to fit within the smaller popup */
+        width: 50px;
+        /* Adjust image size to fit within the smaller popup */
+        height: 50px;
+        /* Adjust image size to fit within the smaller popup */
     }
+
     .social-links img {
         width: 16px;
         height: 16px;
     }
+
     p {
-        font-size: 9px; /* Adjust font size for paragraphs */
-        margin-bottom: 2px; /* Adjust margin for tighter spacing */
+        font-size: 9px;
+        /* Adjust font size for paragraphs */
+        margin-bottom: 2px;
+        /* Adjust margin for tighter spacing */
     }
+
     b {
-        font-size: 9px; /* Adjust font size for bold text */
+        font-size: 9px;
+        /* Adjust font size for bold text */
     }
+
     li {
-        font-size: 9px; /* Adjust font size for list items */
+        font-size: 9px;
+        /* Adjust font size for list items */
     }
-    h2, h3 {
-        font-size: 11px; /* Adjust font size for h2 and h3 headers */
+
+    h2,
+    h3 {
+        font-size: 11px;
+        /* Adjust font size for h2 and h3 headers */
     }
+
     a:link,
     a:visited,
     a:hover,
     a:active {
-        font-size: 9px; /* Adjust font size for links */
+        font-size: 9px;
+        /* Adjust font size for links */
     }
+
     .formatted-value {
-        font-size: 9px; /* Adjust font size for formatted values */
+        font-size: 9px;
+        /* Adjust font size for formatted values */
     }
+
     .popup-container p {
-        margin-bottom: 2px; /* Adjust margin for tighter spacing */
+        margin-bottom: 2px;
+        /* Adjust margin for tighter spacing */
     }
+
     .button {
-        width: 120px; /* Reduced by 25% */
-        height: 30px;   /* Reduced by 25% */
+        width: 160px;
+        /* Adjust button width for smaller screens */
     }
+
     .button .button__text {
-        transform: translateX(11px); /* Adjusted for smaller size */
-        font-size: 11px; /* Adjust font size for better readability on smaller screens */
+        transform: translateX(10px);
+        /* Adjust position */
+        font-size: 12px;
+        /* Adjust font size for smaller screens */
     }
+
     .button .button__icon {
-        transform: translateX(84px); /* Adjusted for smaller size */
-        width: 30px; /* Reduced by 25% */
+        transform: translateX(124px);
+        /* Adjust position */
+        width: 30px;
+        /* Adjust width */
     }
+
     .button .svg {
-        width: 15px; /* Reduced by 25% */
+        width: 18px;
+        /* Adjust icon size */
     }
+
+    .button .button__icon i {
+        font-size: 18px;
+        /* Adjust font size for smaller screens */
+    }
+
     #legend {
         width: 180px;
         padding: 2px;
         font-size: 8px;
     }
+
     .color-bar {
         height: 20px;
     }
+
     .color-description {
         font-size: 9px;
     }
+
     .legend-item {
         font-size: 9px;
     }
+
     .legend-rectangle {
         width: 30px;
         height: 10px;
     }
+
     #info-panel {
-        width: 300px; /* Set width to 300px for mobile responsiveness */
+        width: 300px;
+        /* Set width to 300px for mobile responsiveness */
     }
-}    
+}
