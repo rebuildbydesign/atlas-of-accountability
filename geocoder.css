@@ -12,10 +12,10 @@
     left: auto; /* Reset left to auto */
     right: 20px; /* 20px from the right */
     background-color: #000; /* Black background */
-    width: 400px;
+    width: 225px;
     color: #fff; /* White text */
-    min-width: 300px;
-    z-index: 1;
+    min-width: 225px;
+    z-index: 999;
     border-radius: 0px;
     transition: width .25s, min-width .25s;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Shadow for better visibility */
@@ -27,13 +27,13 @@
     border: none;
     background-color: transparent;
     margin: 0;
-    height: 50px;
+    height: 40px;
     color: #fff; /* White text */
     font-weight: bold; /* Bold text */
-    padding: 15px;
+    padding: 10px;
     font-size: 16px;
     font-family: 'Arial';
-    padding-left: 35px; /* Move text to the right to avoid blocking the icon */
+    padding-left: 40px; /* Move text to the right to avoid blocking the icon */
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -129,12 +129,12 @@
     display: inline-block;
     vertical-align: middle;
     fill: #fff; /* White icon color */
-    top: 15px;
+    top: 10px;
 }
 
 .mapboxgl-ctrl-geocoder--icon-search {
     position: absolute;
-    top: 13px;
+    top: 9px;
     left: 10px; /* Adjust the icon position */
     width: 23px;
     height: 23px;
@@ -219,7 +219,7 @@
         transform: translateX(0);
     }
     50% {
-        transform: translateX(10px);
+        transform: translateX(7px);
     }
 }
 
@@ -230,19 +230,19 @@
 /* Mobile specific styles */
 @media (max-width: 600px) {
     .mapboxgl-ctrl-geocoder {
-        width: 280px; /* 30% reduction from 400px */
-        min-width: 210px; /* 30% reduction from 300px */
+        width: 150px; /* 30% reduction from 400px */
+        min-width: 150px; /* 30% reduction from 300px */
     }
 
     .mapboxgl-ctrl-geocoder--input {
-        height: 35px; /* 30% reduction from 50px */
-        font-size: 11px; /* 30% reduction from 16px */
+        height: 25px; /* 30% reduction from 50px */
+        font-size: 10px; /* 30% reduction from 16px */
         padding: 10px; /* 30% reduction from 15px */
         padding-left: 25px; /* 30% reduction from 35px */
     }
 
     .mapboxgl-ctrl-geocoder--icon-search {
-        top: 10px; /* Adjusted for smaller input */
+        top: 5px; /* Adjusted for smaller input */
         left: 7px; /* Adjusted for smaller input */
         width: 16px; /* 30% reduction from 23px */
         height: 16px; /* 30% reduction from 23px */

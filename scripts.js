@@ -457,5 +457,12 @@ map.on('load', function () {
         });
     });
 
+    document.getElementById('shareReportButton').addEventListener('click', function() {
+        const subject = encodeURIComponent('Atlas of Accountability by Rebuild by Design');
+        const body = encodeURIComponent(
+            'Check out this report from Rebuild by Design called Atlas of Accountability, an interactive map that showcases county-level federally declared disasters alongside congressional districts between 2011-2023. 91% of U.S. counties have experienced a federal climate disaster during this period, with some counties experiencing up to 15 disasters, totaling $106.4 billion in federal funding. This map highlights the urgent need for bipartisan collaboration. The report also outlines strategies for shifting from post-disaster funding to pre-disaster preparedness. \n\nPlease share this with your network to help spread awareness and advocate for stronger, resilient infrastructure.\n\nCheck it out here: https://rebuildbydesign.org/atlas-of-disaster'
+        );
+        window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
 
 });

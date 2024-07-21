@@ -130,7 +130,7 @@ a:active {
 }
 .button {
     position: relative;
-    width: 150px;
+    width: 200px;
     height: 40px;
     cursor: pointer;
     display: flex;
@@ -143,15 +143,15 @@ a:active {
     transition: all 0.3s;
 }
 .button .button__text {
-    transform: translateX(22px);
+    transform: translateX(20px);
     color: #fff;
     font-weight: 600;
 }
 .button .button__icon {
     position: absolute;
-    transform: translateX(109px);
+    transform: translateX(154px);
     height: 100%;
-    width: 39px;
+    width: 40px;
     background-color: #de2d26;
     display: flex;
     align-items: center;
@@ -168,7 +168,7 @@ a:active {
     color: transparent;
 }
 .button:hover .button__icon {
-    width: 148px;
+    width: 200px;
     transform: translateX(0);
 }
 .button:active .button__icon {
@@ -391,18 +391,18 @@ a:active {
         width: 15px; /* Reduced by 25% */
     }
     #legend {
-        width: 220px;
-        padding: 4px;
-        font-size: 10px;
+        width: 180px;
+        padding: 2px;
+        font-size: 8px;
     }
     .color-bar {
-        height: 24px;
+        height: 20px;
     }
     .color-description {
-        font-size: 10px;
+        font-size: 9px;
     }
     .legend-item {
-        font-size: 10px;
+        font-size: 9px;
     }
     .legend-rectangle {
         width: 30px;
