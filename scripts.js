@@ -87,7 +87,7 @@ map.on('load', function () {
     // Load the GeoJSON file for Atlas_FEMA
     map.addSource('atlas-fema', {
         type: 'geojson',
-        data: 'data/Atlas_FEMA4.json'
+        data: 'data/Atlas_FEMA.json'
     });
 
     // Add a layer for the Atlas_FEMA data
@@ -177,7 +177,7 @@ map.on('load', function () {
         var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
         var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
         var party = congressFeature.PARTY;
-        var repImage = femaFeature.PHOTOURL;
+        var repImage = congressFeature.PHOTOURL;
         var websiteUrl = congressFeature.WEBSITEURL;
         var facebookUrl = congressFeature.FACE_BOOK_;
         var twitterUrl = congressFeature.TWITTER_UR;
@@ -242,13 +242,13 @@ map.on('load', function () {
         <h3>US Senators</h3>
         <div class="senator-info">
             <div class="senator-row">
-                <img src="${femaFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
+                <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
                 <div>
                     <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
                 </div>
             </div>
             <div class="senator-row">
-                <img src="${femaFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
+                <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
                 <div>
                     <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
                 </div>
