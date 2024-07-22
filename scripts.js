@@ -1,11 +1,9 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiajAwYnkiLCJhIjoiY2x1bHUzbXZnMGhuczJxcG83YXY4czJ3ayJ9.S5PZpU9VDwLMjoX_0x5FDQ';
 
-
-
-// Determine the initial zoom level based on the screen width
+// ZOOM LEVELS FOR STARTING DEPENDENT ON VIEWPORT SIZE
 const initialZoom = window.innerWidth < 768 ? 2.5 : 3.5;  // Zoom level 3 for mobile, 4 for desktop
 
-// CLIP TO NORTH AMERICA ONLY FOR AMY LOL
+// CLIP TO NORTH AMERICA ONLY
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/j00by/clvx7jcp006zv01ph3miketyz',
@@ -23,13 +21,8 @@ const map = new mapboxgl.Map({
 });
 
 
-
-
-
 // Add zoom and rotation controls to the map.
 // map.addControl(new mapboxgl.NavigationControl());
-
-
 
 
 // LOAD MAPBOX
@@ -67,9 +60,7 @@ map.on('load', function () {
 
 
 
-
-
-    // Display the info panel initially
+    // Display the info panel on startup
     var infoPanel = document.getElementById('info-panel');
     infoPanel.style.display = 'block';
 
@@ -83,12 +74,12 @@ map.on('load', function () {
     });
 
 
-
     // Load the GeoJSON file for Atlas_FEMA
     map.addSource('atlas-fema', {
         type: 'geojson',
         data: 'data/Atlas_FEMA.json'
     });
+
 
     // Add a layer for the Atlas_FEMA data
     map.addLayer({
@@ -152,7 +143,6 @@ map.on('load', function () {
     });
 
 
-
     // Initialize the popup globally if it needs to be accessed by different layers
     var popup = new mapboxgl.Popup({
         closeButton: true,
@@ -190,9 +180,6 @@ map.on('load', function () {
         var senator2Url = congressFeature.SENATOR2_URL;
         var atlasUrl = congressFeature.ATLAS_URL;
         var atlasCover = congressFeature.ATLAS_COVER;
-
-        // Debugging step: log the atlasUrl to the console
-        console.log(`Atlas URL for ${countyName}, ${stateName}: ${atlasUrl}`);
 
         var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
         var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
@@ -268,12 +255,6 @@ map.on('load', function () {
 
 
 
-
-
-
-
-
-
     // Update mouse settings to change on enter and leave of the interactive layer
     map.on('mouseenter', 'atlas-fema-layer', function () {
         map.getCanvas().style.cursor = 'pointer';
@@ -282,8 +263,6 @@ map.on('load', function () {
     map.on('mouseleave', 'atlas-fema-layer', function () {
         map.getCanvas().style.cursor = '';
     });
-
-
 
 
 
@@ -297,9 +276,6 @@ map.on('load', function () {
     //  this.textContent = 'Hide Disaster Data';
     //}
     //});
-
-
-
 
 
 
@@ -362,44 +338,41 @@ map.on('load', function () {
             }
 
             var femaFeature = femaFeatures[0].properties;
-        var congressFeature = congressFeatures[0].properties;
+            var congressFeature = congressFeatures[0].properties;
 
-        var stateName = femaFeature.STATE_NAME;
-        var countyName = femaFeature.NAMELSAD;
-        var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
-        var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
-        var party = congressFeature.PARTY;
-        var repImage = congressFeature.PHOTOURL;
-        var websiteUrl = congressFeature.WEBSITEURL;
-        var facebookUrl = congressFeature.FACE_BOOK_;
-        var twitterUrl = congressFeature.TWITTER_UR;
-        var instagramUrl = congressFeature.INSTAGRAM_;
-        var senator1 = congressFeature.SENATOR1;
-        var sen1party = congressFeature.SENATOR1_PARTY;
-        var senator1Url = congressFeature.SENATOR1_URL;
-        var senator2 = congressFeature.SENATOR2;
-        var sen2party = congressFeature.SENATOR2_PARTY;
-        var senator2Url = congressFeature.SENATOR2_URL;
-        var atlasUrl = congressFeature.ATLAS_URL;
-        var atlasCover = congressFeature.ATLAS_COVER;
+            var stateName = femaFeature.STATE_NAME;
+            var countyName = femaFeature.NAMELSAD;
+            var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
+            var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
+            var party = congressFeature.PARTY;
+            var repImage = congressFeature.PHOTOURL;
+            var websiteUrl = congressFeature.WEBSITEURL;
+            var facebookUrl = congressFeature.FACE_BOOK_;
+            var twitterUrl = congressFeature.TWITTER_UR;
+            var instagramUrl = congressFeature.INSTAGRAM_;
+            var senator1 = congressFeature.SENATOR1;
+            var sen1party = congressFeature.SENATOR1_PARTY;
+            var senator1Url = congressFeature.SENATOR1_URL;
+            var senator2 = congressFeature.SENATOR2;
+            var sen2party = congressFeature.SENATOR2_PARTY;
+            var senator2Url = congressFeature.SENATOR2_URL;
+            var atlasUrl = congressFeature.ATLAS_URL;
+            var atlasCover = congressFeature.ATLAS_COVER;
 
-        // Debugging step: log the atlasUrl to the console
-        console.log(`Atlas URL for ${countyName}, ${stateName}: ${atlasUrl}`);
+            var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
+            var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
+            var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
+            var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
+            var statePerCapita = femaFeature.STATE_PER_CAPITA;
 
-        var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
-        var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
-        var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
-        var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
-        var statePerCapita = femaFeature.STATE_PER_CAPITA;
+            var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedCountyPerCapita = `$${Number(countyPerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
 
-        var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedCountyPerCapita = `$${Number(countyPerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
-
-        var popupContent = `
+            var popupContent = `
         <div class="popup-container">
         <div class="popup-column">
             <h3>${countyName}, ${stateName}</h3>
@@ -451,7 +424,6 @@ map.on('load', function () {
         </div>
     </div>
 `;
-
 
 
             // Set new content and open the popup at the searched location

@@ -1,3 +1,4 @@
+/* MAIN BODY STYLE */
 body {
     margin: 0;
     padding: 0;
@@ -8,7 +9,6 @@ body {
     color: #000;
 }
 
-/* Custom header and link colors */
 h3 {
     color: #000;
 }
@@ -25,7 +25,7 @@ a:active {
     text-decoration: none;
 }
 
-/* Mapbox style */
+/* MAPBOX STYLE */
 #map {
     position: absolute;
     top: 0;
@@ -33,7 +33,7 @@ a:active {
     width: 100%;
 }
 
-/* Atlas title top center */
+/* ATLAS TITLE */
 .css-atlas-title {
     position: absolute;
     top: 10px;
@@ -50,14 +50,12 @@ a:active {
     height: auto;
 }
 
-/* Existing legend styles */
+/* DISASTER COUNT LEGEND */
 #legend {
     position: absolute;
     bottom: 30px;
     left: 10px;
-    /* Moved to the bottom-left corner */
     text-align: left;
-    /* Align text to the left */
     z-index: 999;
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);
@@ -91,7 +89,7 @@ a:active {
     font-weight: bold;
 }
 
-/* New legend item styles */
+/* CONGRESS BOUNDARY LEGEND */
 .legend-item {
     display: flex;
     justify-content: flex-start;
@@ -106,10 +104,9 @@ a:active {
     background-color: #fff;
     border: 1px solid #000;
     margin-right: 10px;
-    /* Adjust the margin if needed for spacing */
 }
 
-/* Information icon top left for methodology */
+/* TOP LEFT HOW TO USE INFO BOX */
 #info-icon:hover {
     opacity: 0.8;
 }
@@ -135,8 +132,7 @@ a:active {
 
 
 /* SHARE THE REPORT BUTTON */
-
-.button-54 {
+.button-report {
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
     letter-spacing: 2px;
@@ -144,44 +140,44 @@ a:active {
     text-transform: uppercase;
     color: #000;
     cursor: pointer;
-    border: 1px solid #000; /* Thinner border for top and left */
-    border-bottom: 2px solid #000; /* Reduced thickness for bottom */
-    border-right: 2px solid #000; /* Reduced thickness for right */
+    border: 1px solid #000;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
     padding: 0.25em 0.5em;
-    background-color: #fff; /* White background */
+    background-color: #fff;
     box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
     position: relative;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    font-weight: bold; /* Bold text */
-    transition: all 0.3s ease; /* Smooth transition for hover effect */
-  }
-  
-  .button-54:hover {
-    background-color: #de2d26; /* Red background on hover */
-    color: #fff; /* White text on hover */
-    box-shadow: 0px 0px 0px 0px, 1px 1px 0px 0px #000, 2px 2px 0px 0px #000, 3px 3px 0px 0px #000, 4px 4px 0px 0px #000, 5px 5px 0px 0px #000; /* Maintain the shadow */
-    border: 1px solid #000; /* Thinner border for top and left */
-    border-bottom: 2px solid #000; /* Reduced thickness for bottom */
-    border-right: 2px solid #000; /* Reduced thickness for right */
-  }
-  
-  .button-54:active {
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.button-report:hover {
+    background-color: #de2d26;
+    color: #fff;
+    box-shadow: 0px 0px 0px 0px, 1px 1px 0px 0px #000, 2px 2px 0px 0px #000, 3px 3px 0px 0px #000, 4px 4px 0px 0px #000, 5px 5px 0px 0px #000;
+    border: 1px solid #000;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+}
+
+.button-report:active {
     box-shadow: 0px 0px 0px 0px;
     top: 5px;
     left: 5px;
-    background-color: #de2d26; /* Red background on active */
-    color: #fff; /* White text on active */
-    font-weight: bold; /* Bold text */
-    border: 1px solid #000; /* Thinner border for top and left */
-    border-bottom: 2px solid #000; /* Reduced thickness for bottom */
-    border-right: 2px solid #000; /* Reduced thickness for right */
-  }
+    background-color: #de2d26;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #000;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+}
 
 
 
-/* Toggle DISASTER DATA */
+/* INACTIVE FOR NOW Toggle DISASTER DATA 
 #toggle-counties {
     font-family: 'Arial';
     font-weight: 300;
@@ -190,6 +186,7 @@ a:active {
     text-align: center;
     color: #de2d26;
 }
+*/
 
 /* POP UP DESIGN */
 .popup-container {
@@ -200,11 +197,11 @@ a:active {
     position: relative;
     width: 100%;
     max-width: 500px;
-    /* Set a maximum width for the popup */
 }
 
 .popup-column {
     flex: 1 1 45%;
+    /* two column style */
 }
 
 .popup-column h3 {
@@ -212,14 +209,12 @@ a:active {
     padding-bottom: 5px;
     color: #000;
     margin-bottom: 8.4px;
-    /* Adjust margin for tighter spacing */
 }
 
 .disaster-count {
     display: flex;
     align-items: center;
     margin-bottom: 8.4px;
-    /* Adjust margin for tighter spacing */
 }
 
 .disaster-count .count {
@@ -239,7 +234,6 @@ a:active {
     background-color: #000;
     padding: 3px;
     margin-bottom: 8.4px;
-    /* Adjust margin for tighter spacing */
 }
 
 .table {
@@ -265,7 +259,6 @@ a:active {
     height: auto;
     display: block;
     margin-bottom: 8.4px;
-    /* Adjust margin for tighter spacing */
 }
 
 .rep-image {
@@ -304,7 +297,6 @@ a:active {
     display: flex;
     align-items: center;
     margin-bottom: 8.4px;
-    /* Adjust margin for tighter spacing */
 }
 
 .senator-image {
@@ -315,7 +307,7 @@ a:active {
 }
 
 
-/* Mobile Responsive Design */
+/* MOBILE RESPONSIVE STYLE FOR MAX WIDTH 400PX */
 @media (max-width: 400px) {
     .popup-container {
         width: 100%;
@@ -383,7 +375,7 @@ a:active {
 
     li {
         font-size: 9px;
-        line-height: 1.2;   
+        line-height: 1.2;
     }
 
     h2,
@@ -409,10 +401,10 @@ a:active {
         margin-bottom: 2px;
     }
 
-    .button-54 {
-        font-size: 11px; /* Shrink font size by 30% */
-        padding: 0.175em 0.35em; /* Shrink padding by 30% */
-      }
+    .button-report {
+        font-size: 11px;
+        padding: 0.175em 0.35em;
+    }
 
     #legend {
         width: 180px;
