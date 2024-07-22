@@ -216,12 +216,14 @@ map.on('load', function () {
             <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
         </div>
         <p class="namelsad">Post-Disaster Assistance</p>
-        <b class="formatted-value">${countyName} FEMA Total:</b> <span class="formatted-value">${formattedCountyFemaTotal}</span><br>
-        <b class="formatted-value">${countyName} Per Capita:</b> <span class="formatted-value">${formattedCountyPerCapita}</span><br>
+        <div style="line-height: 1.2;">
+        <b>${countyName} FEMA Total:</b> <span class="formatted-value">${formattedCountyFemaTotal}</span><br>
+        <b>${countyName} Per Capita:</b> <span class="formatted-value">${formattedCountyPerCapita}</span><br>
         <hr>
-        <b class="formatted-value">${stateName} FEMA Total:</b> <span class="formatted-value">${formattedStateFemaTotal}</span><br>
-        <b class="formatted-value">${stateName} HUD CDBG Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
-        <b class="formatted-value">${stateName} Per Capita:</b> <span class="formatted-value">${formattedStatePerCapita}</span></p>
+        <b>${stateName} FEMA Total:</b> <span class="formatted-value">${formattedStateFemaTotal}</span><br>
+        <b>${stateName} HUD CDBG Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
+        <b>${stateName} Per Capita:</b> <span class="formatted-value">${formattedStatePerCapita}</span>
+    </div>
         <p class="namelsad">Atlas of Disaster Report</p>
         <p>Read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
         <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
@@ -307,11 +309,11 @@ map.on('load', function () {
         mapboxgl: mapboxgl,
         marker: false,
         placeholder: 'Search Address Here',
-        zoom: 7.5,
+        zoom: 6.5,
         bbox: [-124.848974, 24.396308, -66.93457, 49.384358],
         flyTo: {
             bearing: 0,
-            speed: 1.5,  // Transition speed (default is 1.2)
+            speed: 1.2,  // Transition speed (default is 1.2)
             curve: 1,   // Smoothness of the transition (default is 1.42)
             easing: function (t) { return t; }  // Custom easing function
         }
@@ -360,92 +362,94 @@ map.on('load', function () {
             }
 
             var femaFeature = femaFeatures[0].properties;
-            var congressFeature = congressFeatures[0].properties;
+        var congressFeature = congressFeatures[0].properties;
 
-            var stateName = femaFeature.STATE_NAME;
-            var countyName = femaFeature.COUNTY_NAME;
-            var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
-            var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
-            var party = congressFeature.PARTY;
-            var repImage = congressFeature.PHOTOURL;
-            var websiteUrl = congressFeature.WEBSITEURL;
-            var facebookUrl = congressFeature.FACE_BOOK_;
-            var twitterUrl = congressFeature.TWITTER_UR;
-            var instagramUrl = congressFeature.INSTAGRAM_;
-            var senator1 = congressFeature.SENATOR1;
-            var sen1party = congressFeature.SENATOR1_PARTY;
-            var senator1Url = congressFeature.SENATOR1_URL;
-            var senator2 = congressFeature.SENATOR2;
-            var sen2party = congressFeature.SENATOR2_PARTY;
-            var senator2Url = congressFeature.SENATOR2_URL;
-            var atlasUrl = congressFeature.ATLAS_URL;
-            var atlasCover = congressFeature.ATLAS_COVER;
+        var stateName = femaFeature.STATE_NAME;
+        var countyName = femaFeature.NAMELSAD;
+        var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
+        var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
+        var party = congressFeature.PARTY;
+        var repImage = congressFeature.PHOTOURL;
+        var websiteUrl = congressFeature.WEBSITEURL;
+        var facebookUrl = congressFeature.FACE_BOOK_;
+        var twitterUrl = congressFeature.TWITTER_UR;
+        var instagramUrl = congressFeature.INSTAGRAM_;
+        var senator1 = congressFeature.SENATOR1;
+        var sen1party = congressFeature.SENATOR1_PARTY;
+        var senator1Url = congressFeature.SENATOR1_URL;
+        var senator2 = congressFeature.SENATOR2;
+        var sen2party = congressFeature.SENATOR2_PARTY;
+        var senator2Url = congressFeature.SENATOR2_URL;
+        var atlasUrl = congressFeature.ATLAS_URL;
+        var atlasCover = congressFeature.ATLAS_COVER;
 
-            // Debugging step: log the atlasUrl to the console
-            console.log(`Atlas URL for ${countyName}, ${stateName}: ${atlasUrl}`);
+        // Debugging step: log the atlasUrl to the console
+        console.log(`Atlas URL for ${countyName}, ${stateName}: ${atlasUrl}`);
 
-            var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
-            var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
-            var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
-            var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
-            var statePerCapita = femaFeature.STATE_PER_CAPITA;
+        var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
+        var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
+        var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
+        var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
+        var statePerCapita = femaFeature.STATE_PER_CAPITA;
 
-            var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedCountyPerCapita = `$${Number(countyPerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-            var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
+        var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedCountyPerCapita = `$${Number(countyPerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+        var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
 
-            var popupContent = `
-<div class="popup-container">
-    <div class="popup-column">
-        <h3>${countyName}, ${stateName}</h3>
-        <div class="disaster-count">
-            <div class="count">${disasterCount}</div>
-            <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
-        </div>
-        <p class="namelsad">Post-Disaster Assistance</p>
-        <b class="formatted-value">${countyName} FEMA Total:</b> <span class="formatted-value">${formattedCountyFemaTotal}</span><br>
-        <b class="formatted-value">${countyName} Per Capita:</b> <span class="formatted-value">${formattedCountyPerCapita}</span><br>
-        <hr>
-        <b class="formatted-value">${stateName} FEMA Total:</b> <span class="formatted-value">${formattedStateFemaTotal}</span><br>
-        <b class="formatted-value">${stateName} HUD CDBG Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
-        <b class="formatted-value">${stateName} Per Capita:</b> <span class="formatted-value">${formattedStatePerCapita}</span></p>
-        <p class="namelsad">Atlas of Disaster Report</p>
-        <p>Read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
-        <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
-    </div>
-    <div class="popup-column">
-        <p class="namelsad">${congressFeature.NAMELSAD20}</p>
-        <h3>Congress Representative</h3>
-        <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
-        <div class="rep-info">
-            <img src="${repImage}" alt="Profile Picture" class="rep-image">
-            <div class="social-links">
-                <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
-                <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
-                <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
-                <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
+        var popupContent = `
+        <div class="popup-container">
+        <div class="popup-column">
+            <h3>${countyName}, ${stateName}</h3>
+            <div class="disaster-count">
+                <div class="count">${disasterCount}</div>
+                <div class="count-description"># of Federally Declared Extreme Weather Disasters</div>
             </div>
+            <p class="namelsad">Post-Disaster Assistance</p>
+            <div style="line-height: 1.2;">
+            <b>${countyName} FEMA Total:</b> <span class="formatted-value">${formattedCountyFemaTotal}</span><br>
+            <b>${countyName} Per Capita:</b> <span class="formatted-value">${formattedCountyPerCapita}</span><br>
+            <hr>
+            <b>${stateName} FEMA Total:</b> <span class="formatted-value">${formattedStateFemaTotal}</span><br>
+            <b>${stateName} HUD CDBG Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
+            <b>${stateName} Per Capita:</b> <span class="formatted-value">${formattedStatePerCapita}</span>
         </div>
-        <h3>US Senators</h3>
-        <div class="senator-info">
-            <div class="senator-row">
-                <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
-                <div>
-                    <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
+            <p class="namelsad">Atlas of Disaster Report</p>
+            <p>Read more about how communities are experiencing climate change in the Atlas of Disaster: ${stateName} (2011-2021) report.</p>
+            <a href="${atlasUrl}" target="_blank"><img src="${atlasCover}" alt="Atlas Cover" class="atlas-cover"></a>
+        </div>
+        <div class="popup-column">
+            <p class="namelsad">${congressFeature.NAMELSAD20}</p>
+            <h3>Congress Representative</h3>
+            <p><a href="${websiteUrl}" target="_blank" style="color: #a50f15;">${representativeName} (${party})</a></p>
+            <div class="rep-info">
+                <img src="${repImage}" alt="Profile Picture" class="rep-image">
+                <div class="social-links">
+                    <a href="${websiteUrl}" target="_blank"><img src="img/id-card.svg" alt="Website"></a>
+                    <a href="${facebookUrl}" target="_blank"><img src="img/facebook.svg" alt="Facebook"></a>
+                    <a href="${twitterUrl}" target="_blank"><img src="img/twitter.svg" alt="Twitter"></a>
+                    <a href="${instagramUrl}" target="_blank"><img src="img/instagram.svg" alt="Instagram"></a>
                 </div>
             </div>
-            <div class="senator-row">
-                <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
-                <div>
-                    <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
+            <h3>US Senators</h3>
+            <div class="senator-info">
+                <div class="senator-row">
+                    <img src="${congressFeature.SENATE1_PIC}" alt="Senator 1" class="senator-image">
+                    <div>
+                        <a href="${senator1Url}" target="_blank">${senator1} (${sen1party})</a>
+                    </div>
+                </div>
+                <div class="senator-row">
+                    <img src="${congressFeature.SENATOR2_PIC}" alt="Senator 2" class="senator-image">
+                    <div>
+                        <a href="${senator2Url}" target="_blank">${senator2} (${sen2party})</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 `;
 
 
@@ -457,7 +461,7 @@ map.on('load', function () {
         });
     });
 
-    document.getElementById('shareReportButton').addEventListener('click', function() {
+    document.getElementById('shareReportButton').addEventListener('click', function () {
         const subject = encodeURIComponent('Atlas of Accountability by Rebuild by Design');
         const body = encodeURIComponent(
             'Hello,\n\nI believe you will be interested in this.\n\nCheck out Rebuild by Design\'s Atlas of Accountability, a web tool that allows users to identify past federal disaster declarations and recovery funding for climate-driven events county-by-county, and congressional representatives district-by-district. The interactive map is designed to help communities and policymakers understand their localized exposure to extreme weather disasters and the benefits of investments in resilient infrastructure that can make communities safer.\n\nThe analysis finds that for 2011-2023:\n- 91% of congressional districts include a county that has received a federal disaster declaration for an extreme weather event.\n- 72% of states have had more than 10 disaster declarations\n- In 24 states (48%), every county has had a disaster declaration.\n- Of the 23 congressional districts that have experienced 10 or more disasters, over two-thirds are represented by Republicans while nearly one-third are represented by Democrats.\n\nYou can check it out here: https://rebuildbydesign.org/atlas-of-disaster\n\nThis map highlights the urgency of bipartisan cooperation and the need to unite across the urban-rural divide, it also outlines strategies for shifting from post-disaster funding to pre-disaster preparedness.\n\nPlease share this with your network to help spread awareness and advocate for stronger, resilient infrastructure.'

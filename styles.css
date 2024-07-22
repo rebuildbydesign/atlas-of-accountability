@@ -334,64 +334,51 @@ a:active {
 @media (max-width: 400px) {
     .popup-container {
         width: 100%;
-        /* Use 100% width for better fit on mobile */
         max-width: 300px;
-        /* Adjust maximum width for mobile */
     }
 
     .popup-column {
         flex: 1 1 45%;
-        /* Allow columns to stack on mobile */
     }
 
     .popup-column h3 {
         font-size: calc(8px + 0.2vw);
-        /* Adjust font size for better readability on smaller screens */
-        margin-bottom: 2px;
-        /* Adjust margin for tighter spacing */
+        margin-bottom: 3px;
     }
 
     .disaster-count .count {
         font-size: 30px;
-        /* Adjust font size for better readability on smaller screens */
+        margin-top: 6px;
     }
 
     .disaster-count .count-description {
         font-size: 9px;
-        /* Adjust font size for better readability on smaller screens */
+        line-height: 1.2;
+        margin-top: 2px;
     }
 
     .namelsad {
         font-size: 9px;
-        /* Adjust font size for better readability on smaller screens */
         margin-bottom: 1px;
-        /* Adjust margin for tighter spacing */
     }
 
     .table-cell {
         padding: 2px;
-        /* Ensure padding fits within the smaller screen */
     }
 
     .atlas-cover {
         width: 130px;
-        /* Adjust image size to fit within the smaller popup */
         margin-bottom: 1px;
-        /* Adjust margin for tighter spacing */
     }
 
     .rep-image {
         width: 90px;
-        /* Adjust image size to fit within the smaller popup */
         height: 90px;
-        /* Adjust image size to fit within the smaller popup */
     }
 
     .senator-image {
         width: 50px;
-        /* Adjust image size to fit within the smaller popup */
         height: 50px;
-        /* Adjust image size to fit within the smaller popup */
     }
 
     .social-links img {
@@ -401,25 +388,23 @@ a:active {
 
     p {
         font-size: 9px;
-        /* Adjust font size for paragraphs */
-        margin-bottom: 2px;
-        /* Adjust margin for tighter spacing */
+        line-height: 1.2;
     }
 
     b {
         font-size: 9px;
-        /* Adjust font size for bold text */
+        line-height: 1.2;
     }
 
     li {
         font-size: 9px;
-        /* Adjust font size for list items */
+        line-height: 1.2;   
     }
 
     h2,
     h3 {
         font-size: 11px;
-        /* Adjust font size for h2 and h3 headers */
+        line-height: 1.2;
     }
 
     a:link,
@@ -427,46 +412,38 @@ a:active {
     a:hover,
     a:active {
         font-size: 9px;
-        /* Adjust font size for links */
+        line-height: 1.2;
     }
 
     .formatted-value {
         font-size: 9px;
-        /* Adjust font size for formatted values */
+        line-height: 1.2;
     }
 
     .popup-container p {
         margin-bottom: 2px;
-        /* Adjust margin for tighter spacing */
     }
 
     .button {
         width: 160px;
-        /* Adjust button width for smaller screens */
     }
 
     .button .button__text {
         transform: translateX(10px);
-        /* Adjust position */
         font-size: 12px;
-        /* Adjust font size for smaller screens */
     }
 
     .button .button__icon {
         transform: translateX(124px);
-        /* Adjust position */
         width: 30px;
-        /* Adjust width */
     }
 
     .button .svg {
         width: 18px;
-        /* Adjust icon size */
     }
 
     .button .button__icon i {
         font-size: 18px;
-        /* Adjust font size for smaller screens */
     }
 
     #legend {
@@ -494,6 +471,5 @@ a:active {
 
     #info-panel {
         width: 300px;
-        /* Set width to 300px for mobile responsiveness */
     }
 }
