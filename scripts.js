@@ -290,15 +290,16 @@ map.on('load', function () {
         mapboxgl: mapboxgl,
         marker: false,
         placeholder: 'Search Address Here',
-        zoom: 6.5,
-        bbox: [-124.848974, 24.396308, -66.93457, 49.384358],
+        bbox: [-124.848974, 24.396308, -66.93457, 49.384358], // Bounding box for the continental US
         flyTo: {
+            zoom: 6.5, // Ensures the map zooms to level 6.5
             bearing: 0,
-            speed: 1.2,  // Transition speed (default is 1.2)
-            curve: 1,   // Smoothness of the transition (default is 1.42)
-            easing: function (t) { return t; }  // Custom easing function
+            speed: 1.2,
+            curve: 1,
+            easing: function (t) { return t; }
         }
     });
+
 
     // Add the geocoder to the map
     map.addControl(geocoder, 'top-right');
@@ -323,9 +324,6 @@ map.on('load', function () {
 
     // Handle the result event from the geocoder
     geocoder.on('result', function (e) {
-        // User interacted with the geocoder
-        clearTimeout(nudgeTimeout);
-        geocoderContainer.classList.remove('nudge');
         var lngLat = e.result.geometry.coordinates;
 
         // Wait for the map to be idle before processing the result
@@ -338,51 +336,53 @@ map.on('load', function () {
             var femaFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['atlas-fema-layer'] });
             var congressFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['congress-layer'] });
 
-            if (!femaFeatures.length || !congressFeatures.length) {
-                return;
-            }
+            // Check for general location match and handle appropriately
+        if (femaFeatures.length === 0) {
+            alert("No detailed match found. Try a more specific address.");
+            return;
+        }
 
             var femaFeature = femaFeatures[0].properties;
-        var congressFeature = congressFeatures[0].properties;
+            var congressFeature = congressFeatures[0].properties;
 
-        var stateName = femaFeature.STATE_NAME;
-        var countyName = femaFeature.NAMELSAD;
-        var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
-        var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
-        var party = congressFeature.PARTY;
-        var repImage = congressFeature.PHOTOURL;
-        var websiteUrl = congressFeature.WEBSITEURL;
-        var facebookUrl = congressFeature.FACE_BOOK_;
-        var twitterUrl = congressFeature.TWITTER_UR;
-        var instagramUrl = congressFeature.INSTAGRAM_;
-        var senator1 = congressFeature.SENATOR1;
-        var sen1party = congressFeature.SENATOR1_PARTY;
-        var senator1Url = congressFeature.SENATOR1_URL;
-        var senator2 = congressFeature.SENATOR2;
-        var sen2party = congressFeature.SENATOR2_PARTY;
-        var senator2Url = congressFeature.SENATOR2_URL;
-        var atlasUrl = congressFeature.ATLAS_URL;
-        var atlasCover = congressFeature.ATLAS_COVER;
+            var stateName = femaFeature.STATE_NAME;
+            var countyName = femaFeature.NAMELSAD;
+            var disasterCount = femaFeature.COUNTY_DISASTER_COUNT;
+            var representativeName = `${congressFeature.FIRSTNAME} ${congressFeature.LASTNAME}`;
+            var party = congressFeature.PARTY;
+            var repImage = congressFeature.PHOTOURL;
+            var websiteUrl = congressFeature.WEBSITEURL;
+            var facebookUrl = congressFeature.FACE_BOOK_;
+            var twitterUrl = congressFeature.TWITTER_UR;
+            var instagramUrl = congressFeature.INSTAGRAM_;
+            var senator1 = congressFeature.SENATOR1;
+            var sen1party = congressFeature.SENATOR1_PARTY;
+            var senator1Url = congressFeature.SENATOR1_URL;
+            var senator2 = congressFeature.SENATOR2;
+            var sen2party = congressFeature.SENATOR2_PARTY;
+            var senator2Url = congressFeature.SENATOR2_URL;
+            var atlasUrl = congressFeature.ATLAS_URL;
+            var atlasCover = congressFeature.ATLAS_COVER;
 
-        var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
-        var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
-        var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
-        var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
-        var statePerCapita = femaFeature.STATE_PER_CAPITA;
+            var countyFemaTotal = femaFeature.COUNTY_TOTAL_FEMA;
+            var countyPerCapita = femaFeature.COUNTY_PER_CAPITA;
+            var stateFemaTotal = femaFeature.STATE_FEMA_TOTAL;
+            var stateCdbgTotal = femaFeature.STATE_CDBG_TOTAL;
+            var statePerCapita = femaFeature.STATE_PER_CAPITA;
 
-        var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedCountyPerCapita;
-        if (femaFeature.GEOID === "36039" || typeof countyPerCapita !== 'string' && Number.isNaN(Number(countyPerCapita))) {
-            formattedCountyPerCapita = "$11,487 *Under Review";
-        } else {
-            formattedCountyPerCapita = `$${Number(countyPerCapita.replace(/\D/g, '')).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        }
-        var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
+            var formattedCountyFemaTotal = `$${Number(countyFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedCountyPerCapita;
+            if (femaFeature.GEOID === "36039" || typeof countyPerCapita !== 'string' && Number.isNaN(Number(countyPerCapita))) {
+                formattedCountyPerCapita = "$11,487 *Under Review";
+            } else {
+                formattedCountyPerCapita = `$${Number(countyPerCapita.replace(/\D/g, '')).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            }
+            var formattedStateFemaTotal = `$${Number(stateFemaTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStateCdbgTotal = `$${Number(stateCdbgTotal).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePerCapita = `$${Number(statePerCapita).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            var formattedStatePopulation = Number(femaFeature.STATE_POPULATION).toLocaleString('en-US', { maximumFractionDigits: 0 });
 
-        var popupContent = `
+            var popupContent = `
 <div class="popup-container">
     <div class="popup-column">
         <h3>${countyName}, ${stateName}</h3>
