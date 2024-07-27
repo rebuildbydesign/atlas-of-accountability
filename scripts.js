@@ -74,6 +74,15 @@ map.on('load', function () {
     });
 
 
+    // Add event listener for the close button
+    document.getElementById('close-info-panel').addEventListener('click', function () {
+        infoPanel.style.display = 'none';
+    });
+
+
+
+
+
     // Load the GeoJSON file for Atlas_FEMA
     map.addSource('atlas-fema', {
         type: 'geojson',
@@ -337,10 +346,10 @@ map.on('load', function () {
             var congressFeatures = map.queryRenderedFeatures(map.project(lngLat), { layers: ['congress-layer'] });
 
             // Check for general location match and handle appropriately
-        if (femaFeatures.length === 0) {
-            alert("No detailed match found. Try a more specific address.");
-            return;
-        }
+            if (femaFeatures.length === 0) {
+                alert("No detailed match found. Try a more specific address.");
+                return;
+            }
 
             var femaFeature = femaFeatures[0].properties;
             var congressFeature = congressFeatures[0].properties;
@@ -439,6 +448,7 @@ map.on('load', function () {
             popup.setLngLat(lngLat)
                 .setHTML(popupContent)
                 .addTo(map);
+
         });
     });
 
