@@ -222,7 +222,7 @@ map.on('load', function () {
         <b>${countyName} Per Capita:</b> <span class="formatted-value">${formattedCountyPerCapita}</span><br>
         <hr>
         <b>${stateName} FEMA Total:</b> <span class="formatted-value">${formattedStateFemaTotal}</span><br>
-        <b>${stateName} HUD CDBG Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
+        <b>${stateName} HUD CDBG-DR Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
         <b>${stateName} Per Capita:</b> <span class="formatted-value">${formattedStatePerCapita}</span>
     </div>
         <p class="namelsad">Atlas of Disaster Report</p>
@@ -405,7 +405,7 @@ map.on('load', function () {
         <b>${countyName} Per Capita:</b> <span class="formatted-value">${formattedCountyPerCapita}</span><br>
         <hr>
         <b>${stateName} FEMA Total:</b> <span class="formatted-value">${formattedStateFemaTotal}</span><br>
-        <b>${stateName} HUD CDBG Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
+        <b>${stateName} HUD CDBG-DR Total:</b> <span class="formatted-value">${formattedStateCdbgTotal}</span><br>
         <b>${stateName} Per Capita:</b> <span class="formatted-value">${formattedStatePerCapita}</span>
     </div>
         <p class="namelsad">Atlas of Disaster Report</p>
