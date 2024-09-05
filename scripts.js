@@ -89,7 +89,7 @@ map.on('load', function () {
     // Load the GeoJSON file for Atlas_FEMA
     map.addSource('atlas-fema', {
         type: 'geojson',
-        data: 'data/Atlas_FEMA5.json'
+        data: 'data/Atlas_FEMA_V2.json'
     });
 
 
@@ -128,7 +128,7 @@ map.on('load', function () {
     // Load the GeoJSON file for congressional districts with representative names
     map.addSource('congress', {
         type: 'geojson',
-        data: 'data/US_Congress.json'
+        data: 'data/US_Congress_V2.json'
     });
 
     // Add a layer for districts
