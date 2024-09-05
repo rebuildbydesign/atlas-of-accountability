@@ -17,7 +17,10 @@ const map = new mapboxgl.Map({
         name: 'albers',
         center: [-96.68288, 39.32267],
         parallels: [29.5, 45.5]
-    }
+    },
+    pitchWithRotate: false,   // Disable tilting with right-click drag
+    dragRotate: false,        // Disable rotating the map with the mouse
+    maxPitch: 0               // Ensure no tilt at all
 });
 
 
@@ -86,7 +89,7 @@ map.on('load', function () {
     // Load the GeoJSON file for Atlas_FEMA
     map.addSource('atlas-fema', {
         type: 'geojson',
-        data: 'data/Atlas_FEMA.json'
+        data: 'data/Atlas_FEMA5.json'
     });
 
 
