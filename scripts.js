@@ -10,13 +10,11 @@ const map = new mapboxgl.Map({
     center: [-96.68288, 39.32267],
     zoom: initialZoom,
     maxBounds: [
-        [-179.0, 15.0],  // Southwest coordinates (including Hawaii)
-        [-50.0, 60.0]    // Northeast coordinates (trimming more of Europe and South America)
+        [-220.0, -20.0],  // Southwest coordinates (including US Territories)
+        [-50.0, 74.0]    // Northeast coordinates (including Puerto Rico)
     ],
     projection: {
-        name: 'albers',
-        center: [-96.68288, 39.32267],
-        parallels: [29.5, 45.5]
+        name: 'mercator'
     },
     pitchWithRotate: false,   // Disable tilting with right-click drag
     dragRotate: false,        // Disable rotating the map with the mouse
@@ -302,7 +300,6 @@ map.on('load', function () {
         mapboxgl: mapboxgl,
         marker: false,
         placeholder: 'Search Address Here',
-        bbox: [-124.848974, 24.396308, -66.93457, 49.384358], // Bounding box for the continental US
         flyTo: {
             zoom: 6.5, // Ensures the map zooms to level 6.5
             bearing: 0,
