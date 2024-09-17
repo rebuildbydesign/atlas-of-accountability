@@ -130,8 +130,14 @@ a:active {
     overflow-y: auto;
 }
 
+/* Wrapper for buttons */
+.button-wrapper {
+    display: flex;
+    justify-content: start; /* Align buttons to the left */
+    gap: 20px !important; /* Space between buttons */
+}
 
-/* SHARE THE REPORT BUTTON */
+/* SHARE AND DOWNLOAD BUTTON STYLING */
 .button-report {
     font-family: "Open Sans", sans-serif;
     font-size: 16px;

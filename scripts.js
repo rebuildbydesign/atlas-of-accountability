@@ -460,4 +460,11 @@ map.on('load', function () {
         window.location.href = `mailto:?subject=${subject}&body=${body}`;
     });
 
+    // Event listener for the DOWNLOAD button
+document.getElementById('downloadReportButton').addEventListener('click', function () {
+    // Open the download page in a new window
+    window.open('https://rebuildbydesign.org/wp-content/uploads/Atlas-of-Accountability-Full-Report.pdf', '_blank');
+});
+
+
 });
