@@ -461,10 +461,9 @@ map.on('load', function () {
     });
 
     // Event listener for the DOWNLOAD button
-document.getElementById('downloadReportButton').addEventListener('click', function () {
-    // Open the download page in a new window
-    window.open('https://rebuildbydesign.org/wp-content/uploads/Atlas-of-Accountability-Full-Report.pdf', '_blank');
-});
+    document.getElementById('downloadReportButton').addEventListener('click', function () {
+        window.location.href = 'https://rebuildbydesign.org/wp-content/uploads/Atlas-of-Accountability-Full-Report.pdf';  // Replace with the actual URL of your maps download page
+    });
 
 
 });
